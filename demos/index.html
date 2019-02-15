@@ -1,539 +1,1061 @@
-<!-- Demo version: 2018.12.20 -->
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <title>RTCMultiConnection Demos</title>
-  <link rel="canonical" href="/demos/">
-  <meta name="google-site-verification" content="zhJ273gZGLJ_Cbl-muzPYYTR6jD7sCCgufDIRS5h4SE" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="shortcut icon" href="/demos/logo.png">
-  <link rel="stylesheet" href="/demos/stylesheet.css">
-  <script src="/demos/menu.js"></script>
-  <style>
-  .search-container {
-    text-align: left;
-    margin: -2em 5%;
-    margin-top: 0;
-  }
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126953307-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());    
+      gtag('config', 'UA-126953307-1');
+    </script>
 
-  .search-container input {
-    background-color: transparent;
-  }
-
-  .search-container td {
-    border: 0;
-    vertical-align: top;
-    padding: 0;
-    border-top: none;
-    border-right: none;
-  }
-
-  .table-style {
-    border-collapse: collapse;
-    border-spacing: 0px;
-    margin-top: 0px;
-    margin-bottom: 16px;
-    display: block;
-    overflow: auto;
-    word-break: normal;
-    color: rgb(51, 51, 51);
-    font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', Arial, freesans, sans-serif;
-    font-size: 16px;
-    line-height: 25.6000003814697px;
-    margin-top: 10px;
-    margin-left: 20px;
-  }
-
-  .tr-style {
-    border-top-width: 1px;
-    border-top-style: solid;
-    border-top-color: rgb(204, 204, 204);
-    background-color: rgb(248, 248, 248);
-  }
-
-  .td-style {
-    padding: 6px 13px;
-    border: 1px solid rgb(221, 221, 221);
-  }
-
-  .td-style2 {
-    color: rgb(65, 131, 196);
-    text-decoration: none;
-    background: transparent;
-  }
-
-  .github-button {
-    color: #24292e!important;
-    font-size: 11px!important;
-    font-weight: 600!important;
-  }
-
-  .table-style {
-    min-width: 60%!important;
-    display: table!important;
-    text-align: left!important;
-  }
-
-  .table-style-container {}
-  </style>
-</head>
-<body>
-  <header>
-    <a class="logo" href="/demos/"><img src="/demos/logo.png" alt="RTCMultiConnection"></a>
-    <a href="/demos/" class="menu-explorer">Menu<img src="/demos/menu-icon.png" alt="Menu"></a>
-    <nav>
-      <li>
-        <a href="/demos/">Home</a>
-      </li>
-      <li>
-        <a href="https://www.rtcmulticonnection.org/docs/getting-started/">Getting Started</a>
-      </li>
-      <li>
-        <a href="https://www.rtcmulticonnection.org/FAQ/">FAQ</a>
-      </li>
-      <li>
-        <a href="https://www.youtube.com/playlist?list=PLPRQUXAnRydKdyun-vjKPMrySoow2N4tl">YouTube</a>
-      </li>
-      <li>
-        <a href="https://rtcmulticonnection.herokuapp.com/demos/">Demos</a>
-      </li>
-      <li>
-        <a href="https://github.com/muaz-khan/RTCMultiConnection/wiki">Wiki</a>
-      </li>
-      <li>
-        <a href="https://github.com/muaz-khan/RTCMultiConnection">Github</a>
-      </li>
-    </nav>
-  </header>
-
-  <h1>
-    RTCMultiConnection Demos
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="description" content="Share Chess Room using audio, video along with text chat and filesharing with RTCMultiConnection v3.0 lib" />
+    <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share" />
+    <title>ShareChessClub v0.7.3 beta</title>
+    <link rel="stylesheet" href="res/css/style.css">
     
-    <p class="no-mobile">
-      RTCMultiConnection is a WebRTC JavaScript library for peer-to-peer applications (screen sharing, audio/video conferencing, file sharing, media streaming etc.)
-    </p>
-  </h1>
+    <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/stylesheet.css';/*]]>*/</style>
+    <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/demo-files/demo.css';/*]]>*/</style>
+        
+    <link type="text/css" href="res/css/jquery-ui-1.11.4.custom/jquery-ui.css" rel="stylesheet"/>    
+    <link rel="stylesheet" type="text/css" href="res/css/jquery-ui-1.11.icon-font.min.css" />    
+    <script src="res/js/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="res/css/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
+    <script src="res/js/funciones.js" type="text/javascript"></script>
+    <script src="res/js/set.js" type="text/javascript"></script>
+    <script src="res/js/fabric.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+    
+    <script src="res/js/stockfish.js"></script>
+   
+</head>
 
-  <section class="table-style-container" style="float: right; margin-top: 50px; border:0;">
-    <table class="table-style">
-      <thead>
-        <tr>
-          <th class="td-style">TURN Server Name</th>
-          <th class="td-style">Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="tr-style">
-          <td class="td-style">CoTURN</td>
-          <td id="coturn-status" class="td-style">Checking..</td>
-        </tr>
-        <tr class="tr-style">
-          <td class="td-style">Restund</td>
-          <td id="restund-status" class="td-style">Checking..</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+<body>    
+    <div id="divconnect" style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:48px; margin:0 auto 0 auto;">
+        <label for="name" style="color:green; margin-top:16px; float:left; margin-left:20px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Room Name:</label>
+	<input type="text" id="room-id" value="abcdef" name="idoftheroom" maxlength="50"             
+            style="float:left; margin-left:4px; margin-top:6px; width:240px; color:#800080; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px"
+        >        
+        <button style="width:146px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="join-room" title="Open the connection and active webcam and sound" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-contact">icon</span>Connect</button>
+        <button style="width:146px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="disc-room" title="Close the connection, deactive webcam and sound and reload the page" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-link-broken">icon</span>Reload</button>
+        <label for="name2" style="color:green; float:left; margin-left:14px; margin-top:16px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Name or Nick:</label>
+	<input type="text" id="nick-id" value="" name="idofthenick" maxlength="50" placeholder="Your nick here!"            
+            style="float:left; color:#800080; margin-top:6px; margin-left:4px; width:200px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px"
+        >        
+        <button id="playzone" style="width:168px; float:left; margin-top:6px; margin-right:20px; float:right; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Go to kaspichess.com club"><span style="float:left; font-size:24px; margin-left:8px;" class="ui-icon ui-icon-grid">icon</span>KaspiChess</button>
+    </div>    
+    
+    <div id="maindiv" style="border:0px coral solid; width:1106px; height:640px; margin:4px auto 2px auto;">
+        <div id="mainleftdiv" style="background-color:#e8e8e8; float:left; border:3px white solid; width:480px; height:632px;">
+            <canvas id="BoardCanvas" width="442" height="442" style="margin-top:19px; margin-left:17px; border:3px white solid"></canvas>
+            <div id="BtGame" style="margin-top:40px; margin-left:17px; border:3px white solid; width:442px; height:48px;">
+                <button id="BtnFlip" style="width:40px; height:35px; margin-left:6px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Change the side of the pieces" ><span style="float:left; margin-left:-13px; margin-top:-6px; font-size:24px;" class="ui-icon ui-icon-shuffle">icon</span></button>
+                <button id="BtnIni" style="width:40px; height:35px; margin-left:0px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Go to the first position"><span style="float:left; margin-left:-13px; margin-top:-6px; font-size:24px;" class="ui-icon ui-icon-arrowstop-1-w">icon</span></button>
+                <button id="BtnPrev" style="width:40px; height:35px; margin-left:0px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Go to the previous position"><span style="float:left; margin-left:-13px; margin-top:-6px; font-size:24px;" class="ui-icon ui-icon-arrowthick-1-w">icon</span></button>
+                <button id="BtnNext" style="width:40px; height:35px; margin-left:0px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Go to the next position"><span style="float:left; margin-left:-13px; margin-top:-6px; font-size:24px;" class="ui-icon ui-icon-arrowthick-1-e">icon</span></button>
+                <button id="BtnEnd" style="width:40px; height:35px; margin-left:0px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Go to the final position"><span style="float:left; margin-left:-13px; margin-top:-6px; font-size:24px;" class="ui-icon ui-icon-arrowstop-1-e">icon</span></button>
+                <button id="BtnSave" style="width:90px; height:35px; margin-left:0px; margin-top:7px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Save all the moves to a ShareChessClub file format"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-save">icon</span>Save</button>
+                <button id="BtnClearAll" style="width:96px; height:35px; margin-left:0px; margin-top:7px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Resect all the pieces for a new session"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-power">icon</span>Reset</button>
+            </div>
+            <div id="BtConfig" style="margin-top:20px; margin-left:17px; border:3px white solid; width:442px; height:48px;">
+                <button id="new_Btn" type="button" style="width:90px; height:35px; margin-left:6px; margin-top:7px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" title="Load a session file format" class="new_Btn"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-file-table">icon</span>Load</button>
+                <input id="BtnLoad" name="file" type='file'" title="Load a session file format"/>                
+                <button id="BtnSet" type="button" style="width:82px; height:35px; margin-left:0px; margin-top:7px; padding-top:5px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" title="Set a possition from a extra board"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-puzzle">icon</span>SET</button>
+                <button id="BtnFen" type="button" style="width:82px; height:35px; margin-left:0px; margin-top:7px; padding-top:5px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" title="Load a FEN chess character string"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-file-word">icon</span>FEN</button>
+                <button id="BtnPGN" type="button" style="width:82px; height:35px; margin-left:0px; margin-top:7px; padding-top:5px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" title="Load the contents of a PGN file"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-file-richtext">icon</span>PGN</button>
+            </div>
+        </div>
+        <div id="maincenterdiv" style="float:left; margin-left:4px; background-color:#e8e8e8; border:3px white solid; width:380px; height:632px;">
+            <div id="DivTextChat" style="background-color:#FBEDFF; position:relative; height:240px; width:380px; overflow-x:hidden; overflow-y:scroll;">
+	    </div>			
+	    <div id="MensajeChat" style="margin-top:0px; margin-left:0px; border:3px #e8e8e8 solid; width:374px; height:30px;">
+		<input type="text" maxlength="200" id="TxtMsg" placeholder="Please type your message here!"           				 
+                        style="clear:left; margin-top:5px; font-family:Arial,Helvetica,sans-serif; font-size:14px; margin-left:2px; height:14px; width:280px;">
+                <button id="BtnSend" style="width:70px; margin-top:1px; margin-right:0px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Send the message to the chat"><span style="float:left; font-size:18px;" class="ui-icon ui-icon-navigation">icon</span>Send</button>
+            </div>
+            <div id="DivMoves" style="background-color:#FBEDFF; position:relative; height:310px; width:380px; overflow-x:hidden; overflow-y:scroll;">
+	    </div>
+            <button id="BtnAddText" style="float:right; width:70px; margin-top:13px; margin-right:16px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Put some text to the move"><span style="float:left; font-size:18px;" class="ui-icon ui-icon-comment">icon</span>Text</button>
+            <button id="BtnDelete" style="float:right; width:70px; margin-top:13px; margin-right:6px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Delete one inserted move"><span style="float:left; font-size:18px;" class="ui-icon ui-icon-erase">icon</span>Del</button>
+            <button id="BtnCutMoves" style="float:right; width:70px; margin-top:13px; margin-right:6px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Cut a large variant of moves"><span style="float:left; font-size:18px;" class="ui-icon ui-icon-cut">icon</span>Cut</button>
+            <canvas id="SquareCanvas" width="126" height="38" style="float:left; margin-top:2px; margin-left:4px; border:2px white solid"></canvas>
+        </div>
+        <div id="videos-container" style="overflow-x:hidden; overflow-y:scroll; float:left; margin-left:4px; background-color:#e8e8e8; border:3px white solid; width:219px; height:632px;">
+        </div>
+    </div>    
+    
+    <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:300px; margin: 4px auto 0 auto;">        
+        <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Analyzer: Stockfish Engine</label>
+        <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Select depth:</label>
+        <input id="SetDepth" type="text" name="value" value="5" maxlength="3" style="color:#800080; width:50px; float:left; margin-left:3px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px">
+        <button id="BtnRun" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Run Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-circle-triangle-e">icon</span>Run</button>
+        <button id="BtnStop" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Stop Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-stop">icon</span>Stop</button>
+        <label id="StopingLabel" style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:18px">Stoping...</label>
+        <img id="ImgLoader" src="res/img/loader.gif" style="float:left; margin-left:4px; margin-top:8px;">
+        <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Best move: </label>
+        <label id="bestmovelabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+        <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Depth: </label>
+        <label id="depthlabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+    </div>
+    
+    <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:50px; margin: 4px auto 0 auto;">       
+        <button id="share-file" style="float:left; width:132px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Share files between connections"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-transferthick-e-w">icon</span>Share file</button>
+        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.3 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
+    </div>
+    
+    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:210px; margin: 4px auto 0 auto;">
+        <label style="color:green; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Instructions: </label>
+        <label style="color:red; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">1. To share the same space, the code or name of the room must be the same for all participants. You can choose one easier to remember.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">2. Click on the red and green moves to go to the current position.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">3. You need a webcam, microphone and sound.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">4. In case of disconnection it is advisable to reload the page in the browser.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">5. You can do a local test by opening two tabs in the browser and connect to the same room name.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">6. Due to the constant changes while developing the application, it is possible that data from old positions can not be loaded due to incompatibility in the format.</label>
+    </div>
+    
+    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:30px; margin: 4px auto 0 auto;">
+        <label style="color:green; float:left; margin-left:20px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Share File Container</label>
+    </div>
+    
+    <div id="file-container" style="width:1100px; height:40px; margin:0 auto 0 auto;">        
+    </div>
+    
+    <div id="dialog-promo" title="Promotion">
+        <p></p>
+        <img id="wqpromo" src="res/img/merida45wq.png"/>
+        <img id="wrpromo" src="res/img/merida45wr.png"/>
+        <img id="wnpromo" src="res/img/merida45wn.png"/>
+        <img id="wbpromo" src="res/img/merida45wb.png"/>
+        <img id="bqpromo" src="res/img/merida45bq.png"/>
+        <img id="brpromo" src="res/img/merida45br.png"/>
+        <img id="bnpromo" src="res/img/merida45bn.png"/>
+        <img id="bbpromo" src="res/img/merida45bb.png"/>
+        <label style="color:red; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">Click on the Piece</label>
+    </div>
+    
+    <div id="dialog-info" title="Information">
+        <p></p>        
+        <label style="color:red; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">Attention! This action will delete all the moves of this session. Are you sure?</label>
+    </div>
+    
+    <div id="dialog-fen" title="FEN Position">
+        <p></p>        
+        <input type="text" id="fen-id" value="" name="idofthefen" maxlength="100" placeholder="Type your FEN here!"            
+            style="float:left; color:#800080; margin-bottom:30px; margin-top:10px; margin-left:4px; width:400px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px"
+        >
+        <label style="float:left; color:red; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">This action will delete all the moves of this session. Are you sure?</label>
+    </div>
+    
+    <div id="dialog-addtext" title="Add text">
+        <p></p>        
+        <label style="color:red; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">Add text after move</label>
+        <textarea id="addtxt" style="float:left; color:#800080; margin-bottom:30px; margin-top:10px; margin-left:4px; height:200px; width:380px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px">
+        </textarea>
+    </div>
+    
+    <div id="dialog-set" title="Set position">
+        <canvas id="SetCanvas" width="564" height="544" style="float:left; margin-top:20px; margin-left:20px; border:2px white solid"></canvas>
+    </div>    
+        
+    <script src="/RTCMultiConnection.js"></script>
+    <script src="/dev/FileBufferReader.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
-  <section id="demos" style="text-align:center;" class="no-mobile">
-      <h2>
-          <a href="https://www.npmjs.com/package/rtcmulticonnection"><img src="https://img.shields.io/npm/v/rtcmulticonnection.svg" /></a>
-          <a class="github-button" href="https://github.com/muaz-khan/RTCMultiConnection" data-show-count="true" aria-label="Star muaz-khan/RTCMultiConnection on GitHub">Star</a>
-          <a class="github-button" href="https://github.com/muaz-khan/RTCMultiConnection/issues" data-show-count="true" aria-label="Issue muaz-khan/RTCMultiConnection on GitHub">Issue</a>
-          <a class="github-button" href="https://github.com/muaz-khan/RTCMultiConnection/fork" data-show-count="true" aria-label="Fork muaz-khan/RTCMultiConnection on GitHub">Fork</a>
-          <a class="github-button" href="https://github.com/muaz-khan" data-show-count="true" aria-label="Follow @muaz-khan on GitHub">Follow @muaz-khan</a>
-          <a href="https://travis-ci.org/muaz-khan/RTCMultiConnection"><img src="https://travis-ci.org/muaz-khan/RTCMultiConnection.png?branch=master" /></a>
-      </h2>
-  </section>
-  <section id="featured" class="table-style-container">
-      <h2>
-          <a href="#featured">Featured Demos</a>
-
-          <a class="github-button" href="https://github.com/muaz-khan/RTCMultiConnection/archive/master.zip" aria-label="Download muaz-khan/RTCMultiConnection on GitHub">RTCMultiConnection.zip</a>
-      </h2>
-      <table class="table-style">
-          <thead>
-              <tr>
-                  <th class="td-style">RTCMultiConnection Demo Title</th>
-                  <th class="td-style">Demo</th>
-                  <th class="td-style">Source</th>
-              </tr>
-          </thead>
-          <tbody>
-                  <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Video Conferencing (MANY_TO_MANY)</td>
-                    <td class="td-style"><a href="/demos/Video-Conferencing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Video-Conferencing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Dashboard + Video Conferencing + Chat + File Sharing</td>
-                    <td class="td-style"><a href="/demos/dashboard/" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/dashboard/" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Video Conference | Dashboard</td>
-                    <td class="td-style"><a href="/demos/video-conference/" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/video-conference/" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Scalable Audio/Video Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Call A User Using His User-ID (UserName)</td>
-                    <td class="td-style"><a href="/demos/Call-By-UserName.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Call-By-UserName.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Video + Screen Sharing</td>
-                    <td class="td-style"><a href="/demos/video-and-screen-sharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/video-and-screen-sharing.html" class="td-style2">Source</a></td>
-                </tr>                
-
-                <tr class="tr-style">
-                    <td class="td-style">MCU inside the browser!</td>
-                    <td class="td-style"><a href="/demos/MCU.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/MCU.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">SFU inside the browser!</td>
-                    <td class="td-style"><a href="/demos/SFU.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/SFU.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">getStats / WebRTC getStats API</td>
-                    <td class="td-style"><a href="/demos/getStats.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/getStats.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Audio+Video+TextChat+FileSharing</td>
-                    <td class="td-style"><a href="/demos/Audio+Video+TextChat+FileSharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Audio+Video+TextChat+FileSharing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Video Broadcasting (ONE_TO_MANY)</td>
-                    <td class="td-style"><a href="/demos/Video-Broadcasting.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/video-broadcasting.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Fix play/pause bugs using autoCreateMediaElement</td>
-                    <td class="td-style"><a href="/demos/autoCreateMediaElement.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/autoCreateMediaElement.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">WebRTC Scalable Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">WebRTC Scalable Video Conferencing</td>
-                    <td class="td-style"><a href="/demos/Scalable-Video-Conferencing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Video-Conferencing.html" class="td-style2">Source</a></td>
-                </tr>
+    <script>
+        
+    var cChanel;
+    var connection;
+    var chess = new Chess();
+    var stockfish = STOCKFISH();
+    var AnalizeResult;
+    var aAnalizeResult;
+    var Analizando = false;
+            
+    $(document).ready(function(){
+        
+        $('#StopingLabel').hide();
+        
+        stockfish.postMessage("setoption name multipv value 3");
+        
+        stockfish.onmessage = function(event) {
+            
+            console.log(event.data ? event.data : event);
+            AnalizeResult = event.data ? event.data : event;
+            aAnalizeResult = AnalizeResult.split(" ");
+            
+            if (aAnalizeResult[0] == 'bestmove') {
+                $('#bestmovelabel').text(aAnalizeResult[1]);
+                $('#ImgLoader').hide();
+                if (Analizando == false) {                       
+                    $('#BtnStop').hide();
+                    $('#BtnRun').show();
+                    $('#StopingLabel').hide();
+                }
+            }else if (aAnalizeResult[0] == 'info') {
+                if (aAnalizeResult[1] == 'depth') {
+                    var ProfundidadTotal = $('#SetDepth').val();
+                    console.log('Profundidad:' + aAnalizeResult[2])
+                    $('#depthlabel').text(aAnalizeResult[2].toString()+'/'+ProfundidadTotal.toString());
+                }
+            }
+            
+        };
+        
+        $('#BtnStop').hide();
+        $('#ImgLoader').hide();
+        
+        $('#BtnRun').click(function(){            
+            $('#BtnRun').hide();
+            $('#BtnStop').show();
+            $('#ImgLoader').show();
+            Analizando = true;
+            stockfish.postMessage("stop");            
+            var CadenaFEN = aFENs[ContPosi][0] + ' ' + aFENs[ContPosi][1] + ' ' + aFENs[ContPosi][2] + ' ' + aFENs[ContPosi][3] + ' ' + aFENs[ContPosi][4] + ' ' +aFENs[ContPosi][5];
+            console.log(CadenaFEN)
+            stockfish.postMessage("position fen " + CadenaFEN);
+            stockfish.postMessage("go depth " + $('#SetDepth').val());
+        });
+        
+        $('#BtnStop').click(function(){            
+            $('#BtnStop').hide();            
+            $('#BtnRun').show();
+            Analizando = false;
+            stockfish.postMessage("stop");
+        });
+        
+        $('#new_Btn').button();        
+        $('#join-room').button();
+        $('#disc-room').button();
+        $('#playzone').button();
+        $('#BtnSend').button();
+        $('#BtnFlip').button();
+        $('#BtnIni').button();
+        $('#BtnPrev').button();
+        $('#BtnNext').button();
+        $('#BtnEnd').button();        
+        $('#share-file').button();
+        $('#BtnSave').button();
+        $('#BtnSet').button();
+        $('#BtnPGN').button();
+        $('#BtnFen').button();        
+        $('#BtnClearAll').button();        
+        $('#BtnCutMoves').button();
+        $('#BtnDelete').button();
+        $('#BtnAddText').button();        
+        $('#BtnLoad2').button();
+        $('#BtnRun').button();
+        $('#BtnStop').button();
                 
-                <tr class="tr-style">
-                    <td class="td-style">File Sharing</td>
-                    <td class="td-style"><a href="/demos/file-sharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/blob/master/demos/file-sharing.html" class="td-style2">Source</a></td>
-                </tr>
+        $('#disc-room').hide();        
+        
+        $('#BtnCutMoves').click(function(){            
+            var HayHermanos = CheckHayHermanos(ContPosi);
+            if (HayHermanos) {
+                CutMoves2(ContPosi);
+            }else{
+                CutMoves(NodoPadre);                
+            }            
+            RestorePosi(NodoPadre);
+        });        
+        
+        $('#BtnDelete').click(function(){            
+            DeleteMove();
+        });
+        
+        $('#BtnFen').click(function(){
+            $('#dialog-fen').dialog('open');                       
+        });
+        
+        $('#BtnClearAll').click(function(){
+            $('#dialog-info').dialog('open');                       
+        });
+        
+        $('#BtnAddText').click(function(){
+            $('#dialog-addtext').dialog('open');            
+        });
+        
+        $('#BtnSet').click(function(){
+            $('#dialog-set').dialog('open');            
+        });
+        
+        var isSafari = navigator.vendor.indexOf('Apple')==0 && /\sSafari\//.test(navigator.userAgent); // true or false
+        if (isSafari){
+            $('#nick-id').css('width',170);
+            $('#TxtMsg').css('width',280);
+        }
+        
+        $('.new_Btn').on("click" , function () {
+            $('#BtnLoad').click();
+        });
+        
+        var fileInput = document.getElementById('BtnLoad');        
+        
+        fileInput.onclick = function () {
+            this.value = null;
+        };        
+        
+        fileInput.addEventListener('change', function(e){
+            var file = fileInput.files[0];
+            var textType = /text.*/;
+            if (file.type.match(textType)) {
+                var reader = new FileReader();
+                reader.onload = function(e){                    
+                    LoadPos(reader.result);
+                }
+                reader.readAsText(file);    
+            } else {
+                alert('File not supported!');
+            }
+        });
+        
+        $('#BtnSave').click(function(){
+            SavePos();            
+        });
+        
+        $('#playzone').click(function(){
+            window.open('http://kaspichess.com/','_blank');            
+        });
+        
+        $('#wqpromo').click(function(){
+            MakeMove('1');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#wrpromo').click(function(){
+            MakeMove('2');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#wnpromo').click(function(){
+            MakeMove('3');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#wbpromo').click(function(){
+            MakeMove('4');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#bqpromo').click(function(){
+            MakeMove('5');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#brpromo').click(function(){
+            MakeMove('6');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#bnpromo').click(function(){
+            MakeMove('7');
+            $('#dialog-promo').dialog('close');
+        });
+            
+        $('#bbpromo').click(function(){
+            MakeMove('8');
+            $('#dialog-promo').dialog('close');
+        });
+        
+        Reset();
+        
+        CargarRecursos();
+        
+        CreateSet();
+        
+        $('#dialog-promo').dialog({                
+		autoOpen: false,
+		height: 160,
+		width: 380,
+		modal: true,			
+		show: 'blind',
+		hide: 'explode'				
+            }
+	);        
+        
+        $('#dialog-info').dialog({
+		autoOpen: false,
+		height: 270,
+		width: 390,
+		modal: true,			
+		show: 'blind',
+		hide: 'explode',
+		buttons: {
+                        Ok: function() {
+                            ClearAll();
+                            $(this).dialog('close');						
+                        },'Cancel': function() {
+                            $(this).dialog('close');
+                    }
+		}
+	});
+        
+        $('#dialog-fen').dialog({
+		autoOpen: false,
+		height: 290,
+		width: 450,
+		modal: true,
+                show: 'blind',
+		hide: 'explode',
+		buttons: {
+                        Ok: function() {                            
+                            IntroFen();
+                            $('#fen-id').val('');
+                            $(this).dialog('close');                              
+                        },'Cancel': function() {
+                            $(this).dialog('close');
+                    }
+		}
+	});
+        
+        $('#dialog-addtext').dialog({
+		autoOpen: false,
+		height: 440,
+		width: 440,
+		modal: true,			
+		show: 'blind',
+		hide: 'explode',
+		buttons: {
+                        Ok: function() {                            
+                            AddText();                            
+                            $(this).dialog('close');                              
+                        },'Cancel': function() {
+                            $(this).dialog('close');
+                    }
+		}
+	});
+        
+        $('#dialog-set').dialog({
+		autoOpen: false,
+		height: 720,
+		width: 640,
+		modal: true,			
+		show: 'blind',
+		hide: 'explode',
+		buttons: {
+                        Ok: function() {                            
+                            var aBuffer2 = new Array(64);
+                            var i;
+                            for (i = 0; i < aBuffer2.length; i++){
+                                aBuffer2[i] = aPosSet[i];
+                            } 
+                            SendSET(aBuffer2);
+                            $(this).dialog('close');
+                        },
+                        'Clear': function() {
+                            ClearSet();
+                        },
+                        'Reset': function() {
+                            ResetSet();                            
+                        },
+                        'Cancel': function() {
+                            $(this).dialog('close');
+                        }                        
+		}
+	});
+        
+        $('#dialog-fen').on('dialogclose',function(event,ui){
+            
+        });
+	
+	window.addEventListener('beforeunload', function(){            
+	    //Mandar mensaje de closed
+            connection.getSocket().emit('MiEvento',{
+                    NickSender: $('#nick-id').val(),
+                    CustomMessage: '',
+                    Chanel: cChanel,
+                    SubEvent: 'Closed'
+            });
+        }, false);                 
+        
+        document.getElementById('join-room').onclick = function(){                        
+            
+            if ($('#nick-id').val()==''){
+                $('#nick-id').val('anonymous');    
+            }
+            
+            cChanel = $('#room-id').val();
+                        
+            //Mandar mensaje de join
+            connection.getSocket().emit('MiEvento',{
+                    NickSender: $('#nick-id').val(),
+                    CustomMessage: '',
+                    Chanel: cChanel,
+                    SubEvent: 'Join'
+            });            
+            
+            connection.connectionDescription = connection.openOrJoin(document.getElementById('room-id').value);
+            
+            //$('#BtnLoad').click();
+                        
+            $('#DivTextChat').append('<span style="color:red; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">'+ 
+                                    'SYS: ' + '</span>' + 
+                                    '<span style="color:green; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">' +
+                                    'You have joined to the room ' + $('#room-id').val() + '</span><br>');
+            $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);
+            
+            if (typeof URLSearchParams !== 'undefined') {
+                var params = new URLSearchParams('roomname=Sesion1&nickname=KaspiChess');                
+                console.log(params.toString())                
+                params.delete('roomname');
+                params.delete('nickname');                
+                console.log(params.toString())              
+            }else{
+                console.log('Your browser ${navigator.appVersion} does not support URLSearchParams')
+            }           
+            
+        };
+        
+        document.getElementById('disc-room').onclick = function(){
+            //SavePos();
+            connection.getSocket().emit('MiEvento',{
+                    NickSender: $('#nick-id').val(),
+                    CustomMessage: '',
+                    Chanel: cChanel,
+                    SubEvent: 'Closed'
+            });                        
+            window.location.search = "&roomname=" + $('#room-id').val() + "&nickname=" + $('#nick-id').val();            
+        }
+        
+        document.getElementById('share-file').onclick = function(){
+                var fileSelector = new FileSelector();
+                fileSelector.selectSingleFile(function(file){
+                connection.send(file);
+            });
+        };
+        
+        document.getElementById('BtnPGN').onclick = function(){
+                var fileSelector = new FileSelector();
+                fileSelector.selectSingleFile(function(file){
+                    var textType = /.*/;
+                    if (file.type.match(textType)) {
+                        var reader = new FileReader();
+                        reader.onload = function(e){                    
+                            console.log(reader.result);
+                            if (chess.load_pgn(reader.result)) {
+                                CargarPGN();
+                            } else {
+                                alert('File not supported!');
+                            }                            
+                        }
+                        reader.readAsText(file);    
+                    } else {
+                        alert('File not supported!');
+                    }                    
+                });
+        };
+        
+        connection = new RTCMultiConnection();        
+        
+        var isSafari = navigator.vendor.indexOf('Apple')==0 && /\sSafari\//.test(navigator.userAgent); // true or false
+        if (isSafari){
+            connection.mediaConstraints = {
+                audio: true,
+                video: {
+                    facingMode: 'user'
+                }
+            };            
+        }else{ //Android
+            DetectRTC.load(function() {
+                connection.mediaConstraints = {
+                    audio: true,
+                    video: {
+                        mandatory: {
+                            sourceId: DetectRTC.videoInputDevices[0].deviceId // back-camera
+                        },
+                        optional: []
+                    }
+                };
+            });            
+        }
+        
+        if ($.urlParam('roomname') == null){
+            document.getElementById('room-id').value = connection.token(); 
+        }else{
+            document.getElementById('room-id').value = $.urlParam('roomname');
+        }
 
-                <tr class="tr-style">
-                    <td class="td-style">Pre-recorded media streaming (webm/mp3 live streaming)</td>
-                    <td class="td-style"><a href="/demos/Pre-recorded-Media-Streaming.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/blob/master/demos/Pre-recorded-Media-Streaming.html" class="td-style2">Source</a></td>
-                </tr>
-          </tbody>
-      </table>
-  </section>
-  <section id="scalable-broadcast" class="table-style-container">
-      <h2>
-          <a href="#scalable-broadcast">Scalable Broadcast Demos</a>
-      </h2>
-      <table class="table-style">
-          <thead>
-              <tr>
-                  <th class="td-style">RTCMultiConnection Demo Title</th>
-                  <th class="td-style">Demo</th>
-                  <th class="td-style">Source</th>
-              </tr>
-          </thead>
-          <tbody>
-                <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Scalable Audio/Video Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
+        if ($.urlParam('nickname') == null){
+            $('#nick-id').val('anonymous');
+        }else{
+            $('#nick-id').val($.urlParam('nickname'));
+        }
+        
+        connection.channel = document.getElementById('room-id').value;
+        cChanel = $('#room-id').val();
+        
+        connection.enableFileSharing = true; // by default, it is "false".
+        
+        connection.session = {
+            audio: true,
+            video: true,
+            data: true
+        };        
+        
+        connection.sdpConstraints.mandatory = {
+            OfferToReceiveAudio: true,
+            OfferToReceiveVideo: true
+        };
+        
+        var videosContainer = document.getElementById('videos-container');                
+        
+        connection.onstream = function(event) {            
+            
+            var div = document.getElementById(event.userid);
+            if (div) {
+                div.querySelector('video').src = URL.createObjectURL(event.stream);
+                return;
+            }
+        
+            div = document.createElement('div');
+            div.id = event.userid;
+            div.appendChild(event.mediaElement);
+            videosContainer.appendChild(div);
+            event.mediaElement.controls = false;
+            
+            $('#join-room').hide();
+            $('#disc-room').show();
+            
+        };    
 
-                <tr class="tr-style">
-                    <td class="td-style">Scalable Audio-Only Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Audio-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Audio-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
+        connection.filesContainer = document.getElementById('file-container');
 
-                <tr class="tr-style">
-                    <td class="td-style">Scalable Screen Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Screen-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Screen-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Scalable Video Broadcast</td>
-                    <td class="td-style"><a href="/demos/Video-Scalable-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Video-Scalable-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Scalable File Sharing</td>
-                    <td class="td-style"><a href="/demos/Files-Scalable-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Files-Scalable-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Scalable Screen+Audio Broadcast</td>
-                    <td class="td-style"><a href="/demos/Scalable-Screen-plus-Audio-Broadcast.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Scalable-Screen-plus-Audio-Broadcast.html" class="td-style2">Source</a></td>
-                </tr>
-          </tbody>
-      </table>
-  </section>
-  <section id="demos" class="table-style-container">
-      <h2>
-          <a href="#demos">Other Demos</a>
-      </h2>
-      <table class="table-style">
-          <thead>
-              <tr>
-                  <th class="td-style">RTCMultiConnection Demo Title</th>
-                  <th class="td-style">Demo</th>
-                  <th class="td-style">Source</th>
-              </tr>
-          </thead>
-          <tbody>
-                <tr class="tr-style" style="background: #e4f6ff;">
-                    <td class="td-style">Audio Conferencing</td>
-                    <td class="td-style"><a href="/demos/Audio-Conferencing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Audio-Conferencing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">SSE+PHP Signaling (using Server Sent Events)</td>
-                    <td class="td-style"><a href="/demos/SSEConnection.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/SSEConnection.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Zoom Camera during WebRTC Live Streaming</td>
-                    <td class="td-style"><a href="/demos/camera-zoom.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/camera-zoom.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">One-to-One Video Chat</td>
-                    <td class="td-style"><a href="/demos/One-to-One.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/One-to-One.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Vuejs Video Conferencing</td>
-                    <td class="td-style"><a href="/demos/vuejs-video-conferencing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/vuejs-video-conferencing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Multi-Broadcasters and Many-Viewers</td>
-                    <td class="td-style"><a href="/demos/Multi-Broadcasters-and-Many-Viewers.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Multi-Broadcasters-and-Many-Viewers.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">TextChat & FileSharing</td>
-                    <td class="td-style"><a href="/demos/TextChat+FileSharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/TextChat+FileSharing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">FileSharing using TextSender</td>
-                    <td class="td-style"><a href="/demos/File-Sharing-using-TextSender.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/File-Sharing-using-TextSender.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">FileSharing without using FileBufferReader</td>
-                    <td class="td-style"><a href="/demos/File-Sharing-Without-FileBufferReader.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/File-Sharing-Without-FileBufferReader.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">TextChat Translation</td>
-                    <td class="td-style"><a href="/demos/Translate-TextChat.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Translate-TextChat.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Add/enable videos later in chat-rooms</td>
-                    <td class="td-style"><a href="/demos/addStream-in-Chat-room.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/addStream-in-Chat-room.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Share region/portion/part of screen</td>
-                    <td class="td-style"><a href="/demos/share-part-of-screen.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/share-part-of-screen.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Audio alongwith screen sharing</td>
-                    <td class="td-style"><a href="/demos/Audio+ScreenSharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Audio+ScreenSharing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">One-to-Many Screen Sharing</td>
-                    <td class="td-style"><a href="/demos/screen-sharing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/screen-sharing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Cross-domain Screen Capturing & Sharing</td>
-                    <td class="td-style"><a href="/demos/Cross-Domain-Screen-Capturing.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Cross-Domain-Screen-Capturing.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Keep ReJoining Room</td>
-                    <td class="td-style"><a href="/demos/keep-rejoining.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/keep-rejoining.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Open/Close/Rejoin/Disconnect/Rejoin rooms without reloading page</td>
-                    <td class="td-style"><a href="/demos/Disconnect+Rejoin.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Disconnect+Rejoin.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Password-protected rooms (Video Conferencing)</td>
-                    <td class="td-style"><a href="/demos/Password-Protected-Rooms.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Password-Protected-Rooms.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Test RTPSender.replaceTrack API (only in Firefox)</td>
-                    <td class="td-style"><a href="/demos/replaceTrack.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/replaceTrack.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Change Video Resolutions in your Live Sessions</td>
-                    <td class="td-style"><a href="/demos/change-resolutions.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/change-resolutions.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Test MediaStreamTrack.applyConstraints API (only in Firefox)</td>
-                    <td class="td-style"><a href="/demos/applyConstraints.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/applyConstraints.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Video Conferencing using Firebase</td>
-                    <td class="td-style"><a href="/demos/Firebase-Demo.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Firebase-Demo.html" class="td-style2">Source</a></td>
-                </tr>
+        connection.onmessage = function(e){
+            
+        };
+        
+        connection.onopen = function() {
+                         
+        };        
+        
+        connection.onclose = function(event) {                
+           
+        };
+        
+        connection.onleave = function (event) {            
+            
+            // if room moderator left
+            /*if (event.userid === connection.sessionid) {
                 
-                <tr class="tr-style">
-                    <td class="td-style">Video Conferencing using WebSocket</td>
-                    <td class="td-style"><a href="/demos/WebSocket-Demo.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/WebSocket-Demo.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Video Conferencing using PubNub</td>
-                    <td class="td-style"><a href="/demos/PubNub-Demo.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/PubNub-Demo.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Share custom-private messages among users using Socket.io</td>
-                    <td class="td-style"><a href="/demos/custom-socket-event.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/custom-socket-event.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Detect presence before opening or joining the room.</td>
-                    <td class="td-style"><a href="/demos/checkPresence.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/checkPresence.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Switch/Change Cameras in a Live Conference</td>
-                    <td class="td-style"><a href="/demos/switch-cameras.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/switch-cameras.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Check if StreamHasData</td>
-                    <td class="td-style"><a href="/demos/StreamHasData.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/StreamHasData.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">MultiRTC / Skype-like app</td>
-                    <td class="td-style"><a href="/demos/MultiRTC/" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/MultiRTC/" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Admin/Guest demo</td>
-                    <td class="td-style"><a href="/demos/admin-guest.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/admin-guest.html" class="td-style2">Source</a></td>
-                </tr>
-
-                <tr class="tr-style">
-                    <td class="td-style">Audio+Video+Screen Sharing</td>
-                    <td class="td-style"><a href="/demos/Audio-Video-Screen.html" class="td-style2">Demo</a></td>
-                    <td class="td-style"><a href="https://github.com/muaz-khan/RTCMultiConnection/tree/master/demos/Audio-Video-Screen.html" class="td-style2">Source</a></td>
-                </tr>
-          </tbody>
-      </table>
-  </section>
-  <section class="no-mobile">
-      <h2>
-          How to install RTCMultiConnection?
-      </h2>
-      <p>
-        <a href="https://www.youtube.com/watch?v=EtsiYEW_T8Y">https://www.youtube.com/watch?v=EtsiYEW_T8Y</a>
-      </p>
-  </section>
-
-  <section class="no-mobile" class="no-mobile">
-    <h2>iOS or Android</h2>
-    <p>
-      You can write <a href="https://www.rtcmulticonnection.org/docs/Write-iOS-Apps/" target="_blank">iOS</a> or <a href="https://www.rtcmulticonnection.org/docs/Write-Android-Apps/" target="_blank">Android</a> apps for all demos.
-    </p>
-  </section>
-
-  <footer>
-    <small id="send-message"></small>
-  </footer>
-
-  <script async defer src="/demos/is-turn-server-still-running.js"></script>
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script async defer src="https://cdn.webrtc-experiment.com/common.js"></script>
+                connection.checkPresence(connection.sessionid, function(isRoomExists) {
+                    if (isRoomExists){
+                        alert('Join')
+                        connection.join(connection.sessionid);                       
+                    }else{
+                        alert('Open')                        
+                        connection.open(connection.sessionid);
+                    }
+                })                
+                            
+            }
+            
+            Object.keys(connection.streamEvents).forEach(function(streamid) {
+                var streamEvent = connection.streamEvents[streamid];
+                if (streamEvent.userid === event.userid) {
+                    connection.onstreamended(streamEvent);
+                }
+            });*/            
+            
+            //event.mediaElement.parentNode.removeChild(event.mediaElement);
+            
+             //var streamEvent = connection.streamEvents[connection.sessionid];
+            //connection.onstreamended(streamEvent);                
+            
+            //Object.keys(connection.streamEvents).forEach(function(streamid) {
+                //var streamEvent = connection.streamEvents[streamid];
+                //connection.onstreamended(streamEvent);                
+            //});
+            
+            connection.close();            
+            
+            $('#videos-container').empty();
+            
+            //SavePos();
+                        
+        };
+        
+        //Cierra la ventana negra
+	connection.onstreamended = function(e) {    
+	    
+            e.mediaElement.parentNode.removeChild(e.mediaElement);            
+            
+	};
+	
+	//Asignar los eventos aqui para que funcione el socket.on(connection.socketCustomEvent, function(message) {
+        connection.socketCustomEvent = 'MiEvento';
+        
+        connection.connectSocket(function(socket){                        
+            
+            // listen custom messages from server
+            socket.on(connection.socketCustomEvent,function(Message){
+                
+                //Eventos, por el mismo canal
+                if (Message.Chanel==cChanel){                    
+                    
+                    if (Message.SubEvent == 'Chat') {                       
+                    
+                        $('#DivTextChat').append('<span style="color:red; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">'+ 
+                                            Message.NickSender + ': ' + '</span>' + 
+                                            '<span style="color:green; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">' +
+                                            Message.CustomMessage + '</span><br>');
+                        $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);
+                                        
+                    }else if (Message.SubEvent == 'Join') {
+                        
+                        $('#DivTextChat').append('<span style="color:red; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">'+ 
+                                            'SYS: ' + '</span>' + 
+                                            '<span style="color:green; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">' +
+                                            Message.NickSender + ' has connected' + '</span><br>');
+                        $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);                        
+                    
+                    }else if (Message.SubEvent == 'Closed') {
+                        
+                        $('#DivTextChat').append('<span style="color:red; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">'+ 
+                                            'SYS: ' + '</span>' + 
+                                            '<span style="color:green; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">' +
+                                            Message.NickSender + ' has closed the connection' + '</span><br>');
+                        $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);
+                        
+                        connection.close();             
+                        $('#videos-container').empty();
+                        //SavePos();
+                                                
+                    }else if (Message.SubEvent == 'Moving') {
+                        
+                        /*canvas.bringToFront(getItemByName(Message.Name));
+                        if (Message.ColorSide==cColorSide){                            
+                            getItemByName(Message.Name).set({top:Message.Top,left: Message.Left});
+                            getItemByName(Message.Name).setCoords();    
+                        }else{                            
+                            //with flip
+                            ReverseMove(Message.Top,Message.Left,Message.Name);                        
+                        }
+                        canvas.renderAll();*/                        
+                        
+                    }else if (Message.SubEvent == 'SendMove') {
+                        
+                        GetMove(Message);                   
+                        
+                    }else if (Message.SubEvent == 'BtnIniEvent') {
+                        
+                        BtnIniEvent(Message);                
+                        
+                    }else if (Message.SubEvent == 'BtnEndEvent') {
+                        
+                        BtnEndEvent(Message);                
+                        
+                    }else if (Message.SubEvent == 'MoveClickEvent') {
+                        
+                        MoveClickEvent(Message);                
+                        
+                    }else if (Message.SubEvent == 'MoveClick2Event') {
+                        
+                        MoveClick2Event(Message);                
+                        
+                    }else if (Message.SubEvent == 'MoveClick5Event') {
+                        
+                        MoveClick5Event(Message);                
+                        
+                    }else if (Message.SubEvent == 'BtnPrevEvent') {
+                        
+                        BtnPrevEvent(Message);                
+                        
+                    }else if (Message.SubEvent == 'BtnNextEvent') {
+                        
+                        BtnNextEvent(Message);                
+                        
+                    }else if (Message.SubEvent == 'SendColorCas') {
+                        aColorCas = Message.aColorCas;
+                        RecolocarRect();                        
+                    }else if (Message.SubEvent == 'SendBorrarCas') {
+                        DibujarCasillas();
+                        aColorCas = [];
+                    }
+                }           
+            
+            });            
+                        
+        });
+            
+        $('#TxtMsg').bind('keypress',function(e){	    
+            if(e.keyCode==13){                 
+                SendChatText();    
+            }            
+	});
+        
+        $('#BtnSend').click(function(){
+            SendChatText();            
+        });
+        
+        $('#BtnFlip').click(function(){            
+            DibujarCasillas();            
+            if (cColorSide=='White'){
+                cColorSide = 'Black';
+                FlipCoordenadas('Black');
+            }else{
+                cColorSide = 'White';
+                FlipCoordenadas('White');
+            }
+            DrawPos();
+            RecolocarRect();            
+        });
+        
+        $('#BtnIni').click(function(){
+            
+            $('#'+BufferMoveClick).css('background-color','white'); 
+            
+            NodoPadre = -1;
+            NodoPadre2 = -1;
+            
+            ContPosi = 0;
+            ContPosi2 = 0;            
+            
+            $('#DivMoves').html('');
+            ShowLine(-1);            
+            
+            $('#'+ContPosi).css('background-color','yellow');
+            BufferMoveClick = ContPosi;
+                        
+            CasIniSel.visible = false;
+            CasFinSel.visible = false;
+            // Primer click
+            if (Click1){
+                Click1 = false;
+            }
+                        
+            var i;
+            for (i = 0; i < aPos.length; i++){
+                aPos[i] = aPosiciones[ContPosi][i];
+            }
+            
+            DrawPos();
+            
+            connection.getSocket().emit('MiEvento',{
+                Chanel: cChanel,
+                SubEvent: 'BtnIniEvent',
+                Posiciones: aPosiciones,                
+                Variantes: aVariantes                
+            });
+                       
+        });
+        
+        $('#BtnEnd').click(function(){            
+            
+            FinalLine();
+            
+            connection.getSocket().emit('MiEvento',{
+                Chanel: cChanel,
+                SubEvent: 'BtnEndEvent',
+                Posiciones: aPosiciones,
+                ContPosi: ContPosi,
+                Variantes: aVariantes,                
+                NodoPadre: NodoPadre,
+                BufferMoveClick: BufferMoveClick
+            });            
+            
+        });
+        
+        $('#BtnNext').click(function(){
+            
+            connection.getSocket().emit('MiEvento',{
+                Chanel: cChanel,
+                SubEvent: 'BtnNextEvent',
+                Posiciones: aPosiciones,
+                ContPosi: ContPosi,
+                Variantes: aVariantes,                
+                NodoPadre: NodoPadre,
+                BufferMoveClick: BufferMoveClick,
+                SobreVariante: SobreVariante,
+                VarianteDesplegada: VarianteDesplegada
+            });
+            
+            var HayHermano = false;
+            var ContHermanos = 0;
+            var NodoHermano;  
+            
+            if (SobreVariante){
+                SobreVariante = false;
+                MoveClick2(ContPosi);
+            }else{            
+            
+                for (var x = 0; x < aVariantes.length ; x++){                    
+                    if (aVariantes[x][1]==ContPosi){                    
+                        NodoHermano = aVariantes[x][0];                        
+                        //Check si hay hermanos
+                        for (var i = 0; i < aVariantes.length; i++){
+                            if (NodoHermano==aVariantes[i][0]){
+                                ContHermanos++;
+                            }
+                            if (ContHermanos>1){
+                                HayHermano = true;
+                                break;
+                            }
+                        }                    
+                    }            
+                }
+                
+                if ((HayHermano)&&(VarianteDesplegada==false)){
+                    //Mostrar todos los hermanos , label red
+                    $('#DivMoves').html('');
+                    for (var x = 0; x < aVariantes.length; x++){
+                        if (NodoHermano==aVariantes[x][0]){
+                            $('#DivMoves').append('<div class="line"></div>');                             
+                            if (aVariantes[x][4]==true) {                                               
+                                $('#DivMoves').append('<div id="diver'+aVariantes[x][1]+'" style="float:left; border:0px solid black;"></div>');
+                                $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:0px; margin-top:0px; font-family:Chess; font-size:23px">' + aVariantes[x][5] + '</label>');
+                                $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:rgb(128, 0, 0); margin-left:6px; margin-top:2px; font-family:Arial,Helvetica,sans-serif; font-size:17px" id="'+aVariantes[x][1]+'" onclick="MoveClick(id)">' + aVariantes[x][2] + '</label>');
+                            }else{                                
+                                $('#DivMoves').append('<div id="diver'+aVariantes[x][1]+'" style="float:left; border:1px solid black;"></div>');
+                                $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:0px; margin-top:0px; font-family:Chess; font-size:23px">' + aVariantes[x][5] + '</label>');
+                                $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:6px; margin-top:2px; font-family:Arial,Helvetica,sans-serif; font-size:17px" id="'+aVariantes[x][1]+'" onclick="MoveClick(id)">' + aVariantes[x][2] + '</label>');
+                            }                            
+                            //Mostrar hijos
+                            ShowLine(aVariantes[x][1]);                            
+                        }
+                    }
+                    VarianteDesplegada = true;
+                    $('#'+ContPosi).css('background-color','yellow');
+                    BufferMoveClick = ContPosi;
+                }else{            
+                    //Control de variantes normal
+                    var Cont = 0;
+                    for (var x = 0; x < aVariantes.length ; x++){
+                        if (aVariantes[x][0]==ContPosi){
+                            Cont++;
+                        }
+                    }
+                    if (Cont==0){
+                        
+                        //Fin de variante
+                    
+                    }else if (Cont==1){
+                        
+                        //Buscar hijo
+                        NodoPadre = ContPosi;
+                        for (var x = 0; x < aVariantes.length ; x++){
+                            if (aVariantes[x][0]==NodoPadre){
+                                ContPosi = aVariantes[x][1];   
+                            }
+                        }
+                        
+                        $('#'+BufferMoveClick).css('background-color','white'); 
+                        $('#'+ContPosi).css('background-color','yellow');
+                        BufferMoveClick = ContPosi;                   
+                        
+                        var i;
+                        for (i = 0; i < aPos.length; i++){
+                            aPos[i] = aPosiciones[ContPosi][i];
+                        }
+                        
+                        if (ContPosi==0){
+                            CasIniSel.visible = false;
+                            CasFinSel.visible = false;
+                            // Primer click
+                            if (Click1){
+                                Click1 = false;
+                            }
+                        }else{
+                            CasIniSel.visible = true;
+                            CasFinSel.visible = true;
+                        }
+                        
+                        DrawPos();                    
+                        
+                    }else if (Cont>1){
+                       
+                       if (SobreVariante==false){
+                        
+                            SobreVariante = true;
+                            
+                            //Buscar primer hijo
+                            NodoPadre = ContPosi;
+                            for (var x = 0; x < aVariantes.length ; x++){
+                                if (aVariantes[x][0]==NodoPadre){
+                                    ContPosi = aVariantes[x][1];
+                                    break;
+                                }
+                            }
+                             
+                            $('#'+BufferMoveClick).css('background-color','white'); 
+                            $('#'+ContPosi).css('background-color','yellow');
+                            BufferMoveClick = ContPosi;
+                        
+                        }
+                        
+                    }
+                }
+            
+            }            
+            
+        });
+        
+        $('#BtnPrev').click(function(){            
+            
+            if (UltimoMovimiento == false) {
+                NodoPadre2 = NodoPadre;
+                ContPosi2 = ContPosi;
+            }else{
+                UltimoMovimiento = false;
+                NodoPadre2 = BufferNodoPadre2;
+                ContPosi2 = BufferContPosi2; 
+            }            
+            
+            for (var x = 0; x < aVariantes.length; x++){                               
+                if (NodoPadre2==aVariantes[x][1]){                    
+                    NodoPadre = aVariantes[x][0];
+                    ContPosi = aVariantes[x][1];                    
+                    break;                    
+                }                
+            }
+                        
+            $('#'+BufferMoveClick).css('background-color','white');             
+            
+            connection.getSocket().emit('MiEvento',{
+                Chanel: cChanel,
+                SubEvent: 'BtnPrevEvent',
+                Posiciones: aPosiciones,
+                ContPosi: ContPosi,
+                Variantes: aVariantes,                
+                NodoPadre: NodoPadre,
+                BufferMoveClick: BufferMoveClick,
+                ContPosi2: ContPosi2,
+                NodoPadre2: NodoPadre2
+            });
+            
+            ShowLineBack(0);            
+            
+            $('#'+ContPosi).css('background-color','yellow');
+            BufferMoveClick = ContPosi;
+                        
+            if (ContPosi==0){
+                CasIniSel.visible = false;
+                CasFinSel.visible = false;
+                // Primer click
+                if (Click1){
+                    Click1 = false;
+                }
+            }else{
+                CasIniSel.visible = true;
+                CasFinSel.visible = true;
+            }
+            
+            var i;
+            for (i = 0; i < aPos.length; i++){
+                aPos[i] = aPosiciones[ContPosi][i];
+            }
+            
+            DrawPos();             
+                        
+        });
+    
+    }); // End of ready function
+    
+    </script>    
+    
 </body>
+
 </html>
