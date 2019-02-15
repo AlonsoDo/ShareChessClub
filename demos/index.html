@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="description" content="Share Chess Room using audio, video along with text chat and filesharing with RTCMultiConnection v3.0 lib" />
     <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share" />
-    <title>ShareChessClub v0.7.3 beta</title>
+    <title>ShareChessClub v0.7.4 beta</title>
     <link rel="stylesheet" href="res/css/style.css">
     
     <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/stylesheet.css';/*]]>*/</style>
@@ -105,7 +105,7 @@
     
     <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:50px; margin: 4px auto 0 auto;">       
         <button id="share-file" style="float:left; width:132px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Share files between connections"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-transferthick-e-w">icon</span>Share file</button>
-        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.3 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
+        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.4 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
     </div>
     
     <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:210px; margin: 4px auto 0 auto;">
@@ -160,10 +160,10 @@
     
     <div id="dialog-set" title="Set position">
         <canvas id="SetCanvas" width="564" height="544" style="float:left; margin-top:20px; margin-left:20px; border:2px white solid"></canvas>
-    </div>    
-        
-    <script src="/RTCMultiConnection.js"></script>
-    <script src="/dev/FileBufferReader.js"></script>
+    </div>      
+
+    <script src="/dist/RTCMultiConnection.min.js"></script>
+    <script src="/node_modules/webrtc-adapter/out/adapter.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 
     <script>
