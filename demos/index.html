@@ -14,8 +14,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta name="description" content="Share Chess Room using audio, video along with text chat and filesharing with RTCMultiConnection v3.0 lib" />
-    <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share" />
-    <title>ShareChessClub v0.7.4 beta</title>
+    <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share,Board" />
+    <title>ShareChessClub v0.7.5 beta</title>
     <link rel="stylesheet" href="res/css/style.css">
     
     <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/stylesheet.css';/*]]>*/</style>
@@ -41,8 +41,8 @@
 	<input type="text" id="room-id" value="abcdef" name="idoftheroom" maxlength="50"             
             style="float:left; margin-left:4px; margin-top:6px; width:240px; color:#800080; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px"
         >        
-        <button style="width:146px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="join-room" title="Open the connection and active webcam and sound" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-contact">icon</span>Connect</button>
-        <button style="width:146px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="disc-room" title="Close the connection, deactive webcam and sound and reload the page" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-link-broken">icon</span>Reload</button>
+        <button style="width:160px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="join-room" title="Open the connection and active webcam and sound" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-contact">icon</span>Connect</button>
+        <button style="width:160px; float:left; margin-top:6px; margin-left:14px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" id="disc-room" title="Close the connection, deactive webcam and sound" type="button"><span style="float:left; font-size:24px; margin-left:10px;" class="ui-icon ui-icon-link-broken">icon</span>Disconnect</button>
         <label for="name2" style="color:green; float:left; margin-left:14px; margin-top:16px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Name or Nick:</label>
 	<input type="text" id="nick-id" value="" name="idofthenick" maxlength="50" placeholder="Your nick here!"            
             style="float:left; color:#800080; margin-top:6px; margin-left:4px; width:200px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px"
@@ -89,26 +89,49 @@
         </div>
     </div>    
     
-    <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:300px; margin: 4px auto 0 auto;">        
-        <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Analyzer: Stockfish Engine</label>
-        <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Select depth:</label>
-        <input id="SetDepth" type="text" name="value" value="5" maxlength="3" style="color:#800080; width:50px; float:left; margin-left:3px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px">
-        <button id="BtnRun" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Run Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-circle-triangle-e">icon</span>Run</button>
-        <button id="BtnStop" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Stop Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-stop">icon</span>Stop</button>
-        <label id="StopingLabel" style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:18px">Stoping...</label>
-        <img id="ImgLoader" src="res/img/loader.gif" style="float:left; margin-left:4px; margin-top:8px;">
-        <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Best move: </label>
-        <label id="bestmovelabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
-        <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Depth: </label>
-        <label id="depthlabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+    <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:280px; margin: 4px auto 0 auto;">        
+        <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:50px; margin-left:17px; margin-top:17px;">
+            <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Analyzer: Stockfish Engine</label>
+            <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Select depth:</label>
+            <input id="SetDepth" type="text" name="value" value="5" maxlength="3" style="color:#800080; width:50px; float:left; margin-left:3px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px">
+            <button id="BtnRun" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Run Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-circle-triangle-e">icon</span>Run</button>
+            <button id="BtnStop" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Stop Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-stop">icon</span>Stop</button>
+            <label id="StopingLabel" style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:18px">Stoping...</label>
+            <img id="ImgLoader" src="res/img/loader.gif" style="float:left; margin-left:4px; margin-top:8px;">
+            <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Best move: </label>
+            <label id="bestmovelabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+            <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Depth: </label>
+            <label id="depthlabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+        </div>
+        <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
+            <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
+            <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
+                <label id="Score1" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
+            </div>
+            <label id="Variant1" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+        </div>
+        <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
+            <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
+            <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
+                <label id="Score2" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
+            </div>
+            <label id="Variant2" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+        </div>
+        <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
+            <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
+            <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
+                <label id="Score3" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
+            </div>
+            <label id="Variant3" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+        </div>
     </div>
     
     <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:50px; margin: 4px auto 0 auto;">       
         <button id="share-file" style="float:left; width:132px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Share files between connections"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-transferthick-e-w">icon</span>Share file</button>
-        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.4 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
+        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.5 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
     </div>
     
-    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:210px; margin: 4px auto 0 auto;">
+    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:240px; margin: 4px auto 0 auto;">
         <label style="color:green; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Instructions: </label>
         <label style="color:red; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">1. To share the same space, the code or name of the room must be the same for all participants. You can choose one easier to remember.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">2. Click on the red and green moves to go to the current position.</label>
@@ -116,8 +139,8 @@
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">4. In case of disconnection it is advisable to reload the page in the browser.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">5. You can do a local test by opening two tabs in the browser and connect to the same room name.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">6. Due to the constant changes while developing the application, it is possible that data from old positions can not be loaded due to incompatibility in the format.</label>
-    </div>
-    
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">7. Using a high calculation depth with the analysis engine causes slowness in the web application.</label>
+    </div>    
     <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:30px; margin: 4px auto 0 auto;">
         <label style="color:green; float:left; margin-left:20px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Share File Container</label>
     </div>
@@ -198,10 +221,118 @@
                     $('#StopingLabel').hide();
                 }
             }else if (aAnalizeResult[0] == 'info') {
-                if (aAnalizeResult[1] == 'depth') {
-                    var ProfundidadTotal = $('#SetDepth').val();
+                var ProfundidadTotal = $('#SetDepth').val();
+                if (aAnalizeResult[1] == 'depth') {                    
                     console.log('Profundidad:' + aAnalizeResult[2])
                     $('#depthlabel').text(aAnalizeResult[2].toString()+'/'+ProfundidadTotal.toString());
+                }
+                if (aAnalizeResult[5]=='multipv'){
+                    if (aAnalizeResult[6]=='1'){
+                        if (aAnalizeResult[8]=='cp'){
+                            if (aAnalizeResult[9]>0){
+                                $('#Score1').text('+'+aAnalizeResult[9]/100);    
+                            }else{
+                                $('#Score1').text(aAnalizeResult[9]/100);
+                            }
+                            $('#Variant1').text('');
+                            var cVar = '';
+                            for (var x = 0; x < aAnalizeResult[2]; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant1').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }                                                        
+                        }else if (aAnalizeResult[8]=='mate'){
+                            $('#Score1').text('mate ' + aAnalizeResult[9]);
+                            $('#Variant1').text('');
+                            var nNumeVari;
+                            if ((parseInt(aAnalizeResult[9]))>0){
+                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
+                            }else{
+                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
+                            }
+                            console.log('NumeVari:' + nNumeVari)
+                            var cVar = '';
+                            for (var x = 0; x < nNumeVari; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant1').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }
+                        } 
+                    }else if (aAnalizeResult[6]=='2'){
+                        if (aAnalizeResult[8]=='cp'){
+                            if (aAnalizeResult[9]>0){
+                                $('#Score2').text('+'+aAnalizeResult[9]/100);    
+                            }else{
+                                $('#Score2').text(aAnalizeResult[9]/100);
+                            }
+                            $('#Variant2').text('');
+                            var cVar = '';
+                            for (var x = 0; x < aAnalizeResult[2]; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant2').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }
+                        }else if (aAnalizeResult[8]=='mate'){
+                            $('#Score2').text('mate ' + aAnalizeResult[9]);
+                            $('#Variant2').text('');
+                            var nNumeVari;
+                            if ((parseInt(aAnalizeResult[9]))>0){
+                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
+                            }else{
+                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
+                            }
+                            console.log('NumeVari:' + nNumeVari)
+                            var cVar = '';
+                            for (var x = 0; x < nNumeVari; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant2').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }
+                        } 
+                    }else if (aAnalizeResult[6]=='3'){
+                        if (aAnalizeResult[8]=='cp'){
+                            if (aAnalizeResult[9]>0){
+                                $('#Score3').text('+'+aAnalizeResult[9]/100);    
+                            }else{
+                                $('#Score3').text(aAnalizeResult[9]/100);
+                            }
+                            $('#Variant3').text('');
+                            var cVar = '';
+                            for (var x = 0; x < aAnalizeResult[2]; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant3').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }
+                        }else if (aAnalizeResult[8]=='mate'){
+                            $('#Score3').text('mate ' + aAnalizeResult[9]);
+                            $('#Variant3').text('');
+                            var nNumeVari;
+                            if ((parseInt(aAnalizeResult[9]))>0){
+                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
+                            }else{
+                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
+                            }
+                            console.log('NumeVari:' + nNumeVari)
+                            var cVar = '';
+                            for (var x = 0; x < nNumeVari; x++){
+                                cVar = cVar + ' ' + aAnalizeResult[17+x];
+                                $('#Variant3').text(cVar);
+                                if (x == 16){
+                                    break;
+                                }
+                            }
+                        }  
+                    }
                 }
             }
             
@@ -512,13 +643,27 @@
         };
         
         document.getElementById('disc-room').onclick = function(){
-            //SavePos();
-            connection.getSocket().emit('MiEvento',{
+            if (connection.isInitiator) {                
+                connection.closeEntireSession(function() {
+                    //Entire session has been closed code;
+                });
+            } else {
+                connection.leave();
+            }
+            $('#disc-room').hide();
+            $('#join-room').show();
+            var cNickName = $('#nick-id').val();
+            $('#DivTextChat').append('<span style="color:red; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">'+ 
+                            cNickName + ': ' + '</span>' + 
+                            '<span style="color:green; font-size:15px; font-family:Arial,Helvetica,sans-serif; font-weight:bold">' +
+                            'You have leave the room.' + '</span><br>');
+            $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);
+            /*connection.getSocket().emit('MiEvento',{
                     NickSender: $('#nick-id').val(),
                     CustomMessage: '',
                     Chanel: cChanel,
                     SubEvent: 'Closed'
-            });                        
+            });*/                        
             window.location.search = "&roomname=" + $('#room-id').val() + "&nickname=" + $('#nick-id').val();            
         }
         
@@ -671,9 +816,9 @@
                 //connection.onstreamended(streamEvent);                
             //});
             
-            connection.close();            
+            //connection.close();            
             
-            $('#videos-container').empty();
+            //$('#videos-container').empty();
             
             //SavePos();
                         
@@ -721,8 +866,8 @@
                                             Message.NickSender + ' has closed the connection' + '</span><br>');
                         $('#DivTextChat').animate({scrollTop: $('#DivTextChat').prop('scrollHeight')}, 500);
                         
-                        connection.close();             
-                        $('#videos-container').empty();
+                        //connection.close();             
+                        //$('#videos-container').empty();
                         //SavePos();
                                                 
                     }else if (Message.SubEvent == 'Moving') {
@@ -813,7 +958,19 @@
             NodoPadre2 = -1;
             
             ContPosi = 0;
-            ContPosi2 = 0;            
+            ContPosi2 = 0;   
+
+            var aFEN = aFENs[ContPosi];
+            var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+            console.log(CadenaFEN)
+            if (Analizando) {
+                $('#bestmovelabel').text('');
+                $('#ImgLoader').show();
+                stockfish.postMessage("stop");    
+                stockfish.postMessage("position fen " + CadenaFEN);
+                stockfish.postMessage("go depth " + $('#SetDepth').val());    
+            }         
             
             $('#DivMoves').html('');
             ShowLine(-1);            
@@ -856,7 +1013,19 @@
                 Variantes: aVariantes,                
                 NodoPadre: NodoPadre,
                 BufferMoveClick: BufferMoveClick
-            });            
+            });  
+
+            var aFEN = aFENs[ContPosi];
+            var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+            console.log(CadenaFEN)
+            if (Analizando) {
+                $('#bestmovelabel').text('');
+                $('#ImgLoader').show();
+                stockfish.postMessage("stop");    
+                stockfish.postMessage("position fen " + CadenaFEN);
+                stockfish.postMessage("go depth " + $('#SetDepth').val());    
+            }          
             
         });
         
@@ -992,6 +1161,18 @@
             
             }            
             
+            var aFEN = aFENs[ContPosi];
+            var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+            console.log(CadenaFEN)
+            if (Analizando) {
+                $('#bestmovelabel').text('');
+                $('#ImgLoader').show();
+                stockfish.postMessage("stop");    
+                stockfish.postMessage("position fen " + CadenaFEN);
+                stockfish.postMessage("go depth " + $('#SetDepth').val());    
+            }
+
         });
         
         $('#BtnPrev').click(function(){            
@@ -1031,6 +1212,18 @@
             
             $('#'+ContPosi).css('background-color','yellow');
             BufferMoveClick = ContPosi;
+
+            var aFEN = aFENs[ContPosi];
+            var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+            console.log(CadenaFEN)
+            if (Analizando) {
+                $('#bestmovelabel').text('');
+                $('#ImgLoader').show();
+                stockfish.postMessage("stop");    
+                stockfish.postMessage("position fen " + CadenaFEN);
+                stockfish.postMessage("go depth " + $('#SetDepth').val());    
+            }
                         
             if (ContPosi==0){
                 CasIniSel.visible = false;

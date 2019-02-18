@@ -1739,6 +1739,18 @@ function MoveClick(id){
     }    
     
     ContPosi = id;
+
+    var aFEN = aFENs[ContPosi];
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+    console.log(CadenaFEN)
+    if (Analizando) {
+        $('#bestmovelabel').text('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }
     
     if (ContPosi==0){
         CasIniSel.visible = false;
@@ -1794,6 +1806,18 @@ function MoveClick2(id){
     }    
     
     ContPosi = id;
+
+    var aFEN = aFENs[ContPosi];
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+    console.log(CadenaFEN)
+    if (Analizando) {
+        $('#bestmovelabel').text('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }
     
     if (ContPosi==0){
         CasIniSel.visible = false;
@@ -1878,6 +1902,18 @@ function MoveClick5(id){
     
     ContPosi = id;
     NodoPadre = id - 1;
+
+    var aFEN = aFENs[ContPosi];
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+    console.log(CadenaFEN)
+    if (Analizando) {
+        $('#bestmovelabel').text('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }
     
     if (ContPosi==0){
         CasIniSel.visible = false;
@@ -2866,6 +2902,7 @@ function SavePos(){
     
     var aObjPosi = [];
     var aObjVari = [];
+    var aObjFENs = [];
     var aObjAll = [];
     
     for (var i = 0; i < aPosiciones.length; i++){
@@ -2875,8 +2912,12 @@ function SavePos(){
     for (var i = 0; i < aVariantes.length; i++){
         aObjVari.push({"NodoPadre":aVariantes[i][0],"NodoHijo":aVariantes[i][1],"Movi":aVariantes[i][2],"Text":aVariantes[i][3],"VarianteVista":aVariantes[i][4],"Symbol":aVariantes[i][5]});
     }
+
+    for (var i = 0; i < aFENs.length; i++){
+        aObjFENs.push({"PosiFEN":aFENs[i]}); 
+    }
     
-    aObjAll.push({"Posiciones":aObjPosi,"Variantes":aObjVari});
+    aObjAll.push({"Posiciones":aObjPosi,"Variantes":aObjVari,"PosiFENs":aObjFENs});
     
     var blob = new Blob([JSON.stringify(aObjAll)],{type:'text/plain;charset=utf-8'});
     
@@ -2901,6 +2942,11 @@ function LoadPos(result){
     
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
+
+    for (var i = 0; i < aObjAll[0].PosiFENs.length; i++){
+        aFENs.push(aObjAll[0].PosiFENs[i].PosiFEN);
+    }
     
     for (var i = 0; i < aObjAll[0].Posiciones.length; i++){
         aPosiciones.push(aObjAll[0].Posiciones[i].Posi);
@@ -2991,10 +3037,25 @@ function IntroFen(){
     var i = 0;
     var j = 0;
     var cPos = '';    
-        
+
     if ($('#fen-id').val()==''){    
         alert('You must enter a correct value in FEN character string.');
         return
+    }
+
+    var aFEN = FenString.split(" ");
+    aFENs = [];
+    aFENs.push(aFEN);
+    
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+    console.log(CadenaFEN)
+    if (Analizando) {
+        $('#bestmovelabel').text('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
     }
    
     for ( i = 0; i < FenString.length; i++ ){
@@ -3574,6 +3635,18 @@ function MoveClick3(id){
     
     ContPosi = id;
     BufferMoveClick = ContPosi;
+
+    var aFEN = aFENs[ContPosi];
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+    
+    console.log(CadenaFEN)
+    if (Analizando) {
+        $('#bestmovelabel').text('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }
     
     DrawPos();
     
