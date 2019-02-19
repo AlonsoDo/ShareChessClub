@@ -276,7 +276,13 @@ function MakeMove(CodiPromo){
     aFEN[4] = '0';
     aFEN[5] = '1';
     
-    var cFENEnroque = aFENs[NodoPadre][2];
+    var cFENEnroque;
+    
+    if (NodoPadre!=-1){
+        cFENEnroque = aFENs[NodoPadre][2];
+    }else{
+        cFENEnroque = aFENs[0][2];
+    }    
     
     var Pieza;
     var cMove = '';
@@ -1723,6 +1729,7 @@ function MoveClick(id){
         Posiciones: aPosiciones,
         ContPosi: id,
         Variantes: aVariantes,
+        FENs: aFENs,
         //HayHermano: false,
         //NodoPadre: -1,
         //BufferMoveClick: 0,
@@ -1785,7 +1792,8 @@ function MoveClick(id){
         SubEvent: 'MoveClickEvent',
         Posiciones: aPosiciones,
         ContPosi: ContPosi,
-        Variantes: aVariantes,                
+        Variantes: aVariantes, 
+        FENs: aFENs,               
         NodoPadre: NodoPadre,
         BufferMoveClick: BufferMoveClick
     });    
@@ -1882,7 +1890,8 @@ function MoveClick2(id){
         SubEvent: 'MoveClick2Event',
         Posiciones: aPosiciones,
         ContPosi: ContPosi,
-        Variantes: aVariantes,                
+        Variantes: aVariantes, 
+        FENs: aFENs,               
         NodoPadre: NodoPadre,
         BufferMoveClick: BufferMoveClick
     });
@@ -1939,7 +1948,8 @@ function MoveClick5(id){
         SubEvent: 'MoveClick5Event',
         Posiciones: aPosiciones,
         ContPosi: ContPosi,
-        Variantes: aVariantes,                
+        Variantes: aVariantes, 
+        FENs: aFENs,               
         NodoPadre: NodoPadre,
         BufferMoveClick: BufferMoveClick
     });
@@ -2135,7 +2145,7 @@ function GetMove(Message){
     aPosiciones = [];
     aVariantes = [];
                                                 
-    var x,i;
+    var x,i,j;
     
     for ( x = 0; x < Message.Posiciones.length; x++){                            
         aPosiciones.push(Message.Posiciones[x]);
@@ -2145,6 +2155,10 @@ function GetMove(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
+    }
+
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
     }
                         
     if (aPosiciones.length > 1){
@@ -2327,6 +2341,7 @@ function BtnIniEvent(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2338,7 +2353,11 @@ function BtnIniEvent(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
-    }        
+    }   
+    
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
+    }
                         
     NodoPadre = -1;
     NodoPadre2 = -1;
@@ -2375,6 +2394,7 @@ function BtnEndEvent(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2386,6 +2406,10 @@ function BtnEndEvent(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
+    }
+
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
     }
     
     NodoPadre = Message.NodoPadre;   
@@ -2455,6 +2479,7 @@ function MoveClickEvent(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2466,6 +2491,10 @@ function MoveClickEvent(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
+    }
+
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
     }
     
     NodoPadre = Message.NodoPadre;
@@ -2562,6 +2591,7 @@ function MoveClick2Event(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2573,6 +2603,10 @@ function MoveClick2Event(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
+    }
+
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
     }
     
     NodoPadre = Message.NodoPadre;
@@ -2639,6 +2673,7 @@ function MoveClick5Event(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2652,6 +2687,10 @@ function MoveClick5Event(Message){
         aVariantes.push(Message.Variantes[x]);                          
     }
     
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
+    }
+
     NodoPadre = Message.NodoPadre;
     ContPosi = Message.ContPosi; 
     
@@ -2692,6 +2731,7 @@ function BtnPrevEvent(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2703,6 +2743,10 @@ function BtnPrevEvent(Message){
     
     for ( x = 0; x < Message.Variantes.length; x++){                            
         aVariantes.push(Message.Variantes[x]);                          
+    }
+
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
     }
     
     NodoPadre = Message.NodoPadre;
@@ -2755,6 +2799,7 @@ function BtnNextEvent(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i;
     
@@ -2768,6 +2813,10 @@ function BtnNextEvent(Message){
         aVariantes.push(Message.Variantes[x]);                          
     }
     
+    for ( x = 0; x < Message.FENs.length; x++){
+        aFENs.push(Message.FENs[x]);
+    }
+
     NodoPadre = Message.NodoPadre;
     ContPosi = Message.ContPosi;        
     
@@ -2988,6 +3037,7 @@ function LoadPos(result){
         Posiciones: aPosiciones,
         ContPosi: 0,
         Variantes: aVariantes,
+        FENs: aFENs,
         HayHermano: false,
         NodoPadre: -1,
         BufferMoveClick: 0,
@@ -3023,6 +3073,7 @@ function ClearAll(){
         Posiciones: aPosiciones,
         ContPosi: 0,
         Variantes: aVariantes,
+        FENs: aFENs,
         HayHermano: false,
         NodoPadre: -1,
         BufferMoveClick: 0,
@@ -3323,7 +3374,7 @@ function CargarPGN() {
     BufferNodoPadre = 0;
     ContPosi = 1;
     BufferContPosi = 1;
-    TotalNodos = 1;
+    TotalNodos = 1;    
     
     for ( h = 0; h < BufferHistory.length; h++) {        
        
@@ -3332,7 +3383,10 @@ function CargarPGN() {
         aPos[65] = CasToIndex(BufferHistory[h].from);
         aPos[66] = CasToIndex(BufferHistory[h].to);
         
-        FenString = chess.fen();       
+        FenString = chess.fen(); 
+        console.log(FenString)
+        var aFEN = FenString.split(" ");
+        aFENs.push(aFEN);
         
         cPos = '';
         
@@ -3604,6 +3658,7 @@ function CargarPGN() {
         Posiciones: aPosiciones,
         ContPosi: ContPosi,
         Variantes: aVariantes,
+        FENs: aFENs,
         HayHermano: false,
         NodoPadre: NodoPadre,
         BufferMoveClick: BufferMoveClick,
@@ -3708,6 +3763,7 @@ function AddText() {
             Posiciones: aPosiciones,
             ContPosi: ContPosi,
             Variantes: aVariantes,
+            FENs: aFENs,
             //HayHermano: false,
             //NodoPadre: -1,
             //BufferMoveClick: 0,
@@ -3956,7 +4012,8 @@ function DeleteMove(){
             SubEvent: 'BtnPrevEvent',
             Posiciones: aPosiciones,
             ContPosi: ContPosi,
-            Variantes: aVariantes,                
+            Variantes: aVariantes,  
+            FENs: aFENs,              
             NodoPadre: NodoPadre,
             BufferMoveClick: BufferMoveClick,
             ContPosi2: ContPosi2,
@@ -4070,7 +4127,8 @@ function RestorePosi(Nodo) {
         SubEvent: 'BtnPrevEvent',
         Posiciones: aPosiciones,
         ContPosi: Nodo,
-        Variantes: aVariantes,                
+        Variantes: aVariantes,  
+        FENs: aFENs,              
         NodoPadre: NodoPadre,
         BufferMoveClick: BufferMoveClick,
         ContPosi2: ContPosi2,
