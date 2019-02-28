@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="description" content="Share Chess Room using audio, video along with text chat and filesharing with RTCMultiConnection v3.0 lib" />
     <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share,Board" />
-    <title>ShareChessClub v0.7.6 beta</title>
+    <title>ShareChessClub v0.7.7 beta</title>
     <link rel="stylesheet" href="res/css/style.css">
     
     <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/stylesheet.css';/*]]>*/</style>
@@ -99,36 +99,42 @@
             <label id="StopingLabel" style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:18px">Stoping...</label>
             <img id="ImgLoader" src="res/img/loader.gif" style="float:left; margin-left:4px; margin-top:8px;">
             <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Best move: </label>
-            <label id="bestmovelabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+            <div id="Variant0" style="float:left; background-color:#e8e8e8; border:2px white solid; width:110px; height:30px; margin-left:4px; margin-top:9px;">
+            </div>
             <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Depth: </label>
-            <label id="depthlabel" style="color:green; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px"></label>
+            <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:90px; height:30px; margin-left:4px; margin-top:9px;">
+                <label id="depthlabel" style="color:green; float:left; margin-left:10px; margin-top:6px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:17px"></label>
+            </div>
         </div>
         <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
             <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
             <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
                 <label id="Score1" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
             </div>
-            <label id="Variant1" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+            <div id="Variant1" style="float:left; background-color:#e8e8e8; border:2px white solid; width:890px; height:30px; margin-left:4px; margin-top:3px;">
+            </div>
         </div>
         <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
             <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
             <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
                 <label id="Score2" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
             </div>
-            <label id="Variant2" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+            <div id="Variant2" style="float:left; background-color:#e8e8e8; border:2px white solid; width:890px; height:30px; margin-left:4px; margin-top:3px;">
+            </div>
         </div>
         <div style="float:left; background-color:#e8e8e8; border:3px white solid; width:1060px; height:40px; margin-left:17px; margin-top:17px;">
             <label style="color:red; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Score:</label>
             <div style="float:left; background-color:#e8e8e8; border:2px white solid; width:70px; height:30px; margin-left:4px; margin-top:3px;">
                 <label id="Score3" style="color:green; float:left; margin-left:5px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">+10.00</label>
             </div>
-            <label id="Variant3" style="color:green; float:left; margin-left:25px; margin-top:12px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">e2e4 c7c5</label>
+            <div id="Variant3" style="float:left; background-color:#e8e8e8; border:2px white solid; width:890px; height:30px; margin-left:4px; margin-top:3px;">
+            </div>
         </div>
     </div>
     
     <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:50px; margin: 4px auto 0 auto;">       
         <button id="share-file" style="float:left; width:132px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Share files between connections"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-transferthick-e-w">icon</span>Share file</button>
-        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.6 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
+        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.7 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
     </div>
     
     <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:240px; margin: 4px auto 0 auto;">
@@ -195,6 +201,7 @@
     var cChanel;
     var connection;
     var chess = new Chess();
+    var chess2 = new Chess();
     var stockfish = STOCKFISH();
     var AnalizeResult;
     var aAnalizeResult;
@@ -211,131 +218,103 @@
             console.log(event.data ? event.data : event);
             AnalizeResult = event.data ? event.data : event;
             aAnalizeResult = AnalizeResult.split(" ");
-            
-            if (aAnalizeResult[0] == 'bestmove') {
-                $('#bestmovelabel').text(aAnalizeResult[1]);
-                $('#ImgLoader').hide();
-                if (Analizando == false) {                       
-                    $('#BtnStop').hide();
-                    $('#BtnRun').show();
-                    $('#StopingLabel').hide();
-                }
-            }else if (aAnalizeResult[0] == 'info') {
+            console.log(aAnalizeResult)
+            var aSize = aAnalizeResult.length;
+            console.log(aSize)
+            var Lugar;
+
+            Lugar = BuscarLugar('depth');
+            if (Lugar != -1){
+                var Profundidad = aAnalizeResult[Lugar+1];
                 var ProfundidadTotal = $('#SetDepth').val();
-                if (aAnalizeResult[1] == 'depth') {                    
-                    console.log('Profundidad:' + aAnalizeResult[2])
-                    $('#depthlabel').text(aAnalizeResult[2].toString()+'/'+ProfundidadTotal.toString());
-                }
-                if (aAnalizeResult[5]=='multipv'){
-                    if (aAnalizeResult[6]=='1'){
-                        if (aAnalizeResult[8]=='cp'){
-                            if (aAnalizeResult[9]>0){
-                                $('#Score1').text('+'+aAnalizeResult[9]/100);    
-                            }else{
-                                $('#Score1').text(aAnalizeResult[9]/100);
-                            }
-                            $('#Variant1').text('');
-                            var cVar = '';
-                            for (var x = 0; x < aAnalizeResult[2]; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant1').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }                                                        
-                        }else if (aAnalizeResult[8]=='mate'){
-                            $('#Score1').text('mate ' + aAnalizeResult[9]);
-                            $('#Variant1').text('');
-                            var nNumeVari;
-                            if ((parseInt(aAnalizeResult[9]))>0){
-                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
-                            }else{
-                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
-                            }
-                            console.log('NumeVari:' + nNumeVari)
-                            var cVar = '';
-                            for (var x = 0; x < nNumeVari; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant1').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }
-                        } 
-                    }else if (aAnalizeResult[6]=='2'){
-                        if (aAnalizeResult[8]=='cp'){
-                            if (aAnalizeResult[9]>0){
-                                $('#Score2').text('+'+aAnalizeResult[9]/100);    
-                            }else{
-                                $('#Score2').text(aAnalizeResult[9]/100);
-                            }
-                            $('#Variant2').text('');
-                            var cVar = '';
-                            for (var x = 0; x < aAnalizeResult[2]; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant2').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }
-                        }else if (aAnalizeResult[8]=='mate'){
-                            $('#Score2').text('mate ' + aAnalizeResult[9]);
-                            $('#Variant2').text('');
-                            var nNumeVari;
-                            if ((parseInt(aAnalizeResult[9]))>0){
-                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
-                            }else{
-                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
-                            }
-                            console.log('NumeVari:' + nNumeVari)
-                            var cVar = '';
-                            for (var x = 0; x < nNumeVari; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant2').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }
-                        } 
-                    }else if (aAnalizeResult[6]=='3'){
-                        if (aAnalizeResult[8]=='cp'){
-                            if (aAnalizeResult[9]>0){
-                                $('#Score3').text('+'+aAnalizeResult[9]/100);    
-                            }else{
-                                $('#Score3').text(aAnalizeResult[9]/100);
-                            }
-                            $('#Variant3').text('');
-                            var cVar = '';
-                            for (var x = 0; x < aAnalizeResult[2]; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant3').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }
-                        }else if (aAnalizeResult[8]=='mate'){
-                            $('#Score3').text('mate ' + aAnalizeResult[9]);
-                            $('#Variant3').text('');
-                            var nNumeVari;
-                            if ((parseInt(aAnalizeResult[9]))>0){
-                                nNumeVari = ((aAnalizeResult[9]) * 2) - 1;
-                            }else{
-                                nNumeVari = (((aAnalizeResult[9]) * 2) * (-1));
-                            }
-                            console.log('NumeVari:' + nNumeVari)
-                            var cVar = '';
-                            for (var x = 0; x < nNumeVari; x++){
-                                cVar = cVar + ' ' + aAnalizeResult[17+x];
-                                $('#Variant3').text(cVar);
-                                if (x == 16){
-                                    break;
-                                }
-                            }
-                        }  
-                    }
-                }
+                $('#depthlabel').text(Profundidad + '/' + ProfundidadTotal);
+            }
+
+            Lugar = BuscarLugar('bestmove');            
+            if (Lugar != -1){
+                ConvertVariant(0,aAnalizeResult[Lugar+1]);
+                $('#ImgLoader').hide();
+                //$('#BtnStop').hide();
+                $('#StopingLabel').hide();    
+                //$('#BtnRun').show();
             }
             
+            Lugar = BuscarLugar('multipv')
+            if (Lugar != -1){
+                if (aAnalizeResult[Lugar+1]==1){
+                    console.log('Variante: 1')
+                    Lugar = BuscarLugar('cp');
+                    if (Lugar != -1){
+                        if (aAnalizeResult[Lugar+1] > 0){
+                            $('#Score1').text('+' + (aAnalizeResult[Lugar+1]/100).toFixed(2));
+                        }else{
+                            $('#Score1').text((aAnalizeResult[Lugar+1]/100).toFixed(2)); 
+                        }                        
+                    }
+                    Lugar = BuscarLugar('mate');
+                    if (Lugar != -1){
+                        $('#Score1').text('mate ' + aAnalizeResult[Lugar+1]);
+                    }
+                    Lugar = BuscarLugar('pv');
+                    if (Lugar != -1){
+                        $('#Variant1').html('');
+                        var cVar = '';
+                        for (var x = Lugar + 1; x < aSize; x++){
+                            cVar = cVar + ' ' + aAnalizeResult[x];
+                            cVar = cVar.trim();                            
+                            ConvertVariant(1,cVar);                                                                                                                       
+                        }
+                    }
+                }else if(aAnalizeResult[Lugar+1]==2){
+                    console.log('Variante: 2')
+                    Lugar = BuscarLugar('cp');
+                    if (Lugar != -1){
+                        if (aAnalizeResult[Lugar+1] > 0){
+                            $('#Score2').text('+' + (aAnalizeResult[Lugar+1]/100).toFixed(2));
+                        }else{
+                            $('#Score2').text((aAnalizeResult[Lugar+1]/100).toFixed(2));
+                        }                        
+                    }
+                    Lugar = BuscarLugar('mate');
+                    if (Lugar != -1){
+                        $('#Score2').text('mate ' + aAnalizeResult[Lugar+1]);
+                    }
+                    Lugar = BuscarLugar('pv');
+                    if (Lugar != -1){
+                        $('#Variant2').html('');
+                        var cVar = '';
+                        for (var x = Lugar + 1; x < aSize; x++){
+                            cVar = cVar + ' ' + aAnalizeResult[x];
+                            cVar = cVar.trim();                            
+                            ConvertVariant(2,cVar);                                                                                                                       
+                        }
+                    }
+                }else if(aAnalizeResult[Lugar+1]==3){
+                    console.log('Variante: 3')
+                    Lugar = BuscarLugar('cp');
+                    if (Lugar != -1){
+                        if (aAnalizeResult[Lugar+1] > 0){
+                            $('#Score3').text('+' + (aAnalizeResult[Lugar+1]/100).toFixed(2));
+                        }else{
+                            $('#Score3').text((aAnalizeResult[Lugar+1]/100).toFixed(2));
+                        }
+                    }
+                    Lugar = BuscarLugar('mate');
+                    if (Lugar != -1){
+                        $('#Score3').text('mate ' + aAnalizeResult[Lugar+1]);
+                    }
+                    Lugar = BuscarLugar('pv');
+                    if (Lugar != -1){
+                        $('#Variant3').html('');
+                        var cVar = '';
+                        for (var x = Lugar + 1; x < aSize; x++){
+                            cVar = cVar + ' ' + aAnalizeResult[x];
+                            cVar = cVar.trim();                            
+                            ConvertVariant(3,cVar);                                                                                                                       
+                        }
+                    }
+                }
+            }         
         };
         
         $('#BtnStop').hide();
@@ -346,11 +325,13 @@
             $('#BtnStop').show();
             $('#ImgLoader').show();
             Analizando = true;
-            stockfish.postMessage("stop");            
             var CadenaFEN = aFENs[ContPosi][0] + ' ' + aFENs[ContPosi][1] + ' ' + aFENs[ContPosi][2] + ' ' + aFENs[ContPosi][3] + ' ' + aFENs[ContPosi][4] + ' ' +aFENs[ContPosi][5];
             console.log(CadenaFEN)
             stockfish.postMessage("position fen " + CadenaFEN);
-            stockfish.postMessage("go depth " + $('#SetDepth').val());
+            if ($('#SetDepth').val()==''){
+                $('#SetDepth').val('1'); 
+            }
+            stockfish.postMessage("go depth " + $('#SetDepth').val());                         
         });
         
         $('#BtnStop').click(function(){            

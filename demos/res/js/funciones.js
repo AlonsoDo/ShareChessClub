@@ -799,20 +799,15 @@ function MakeMove(CodiPromo){
         cFEN = cFEN + '/'
     }
     
+    var cFEN = cFEN.substring(0, cFEN.length-1);
     aFEN[0] = cFEN;
+    //console.log('cFEN[0] ' + cFEN)
     
     aFENs.push(aFEN);
+
+    //aFEN[0]='rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR'
     
     var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
-    
-    console.log(CadenaFEN)
-    if (Analizando) {
-        $('#bestmovelabel').text('');
-        $('#ImgLoader').show();
-        stockfish.postMessage("stop");    
-        stockfish.postMessage("position fen " + CadenaFEN);
-        stockfish.postMessage("go depth " + $('#SetDepth').val());    
-    }
     
     connection.getSocket().emit('MiEvento',{
         Chanel: cChanel,
@@ -826,6 +821,15 @@ function MakeMove(CodiPromo){
         BufferMoveClick: BufferMoveClick,
         TipoMove: 'Normal'
     });
+
+    console.log('Make Move: ' + CadenaFEN)
+    if (Analizando) {
+        $('#Variant0').html('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }
     
     NodoPadre = ContPosi; //Listo para proximo movimiento
     
@@ -4269,3 +4273,115 @@ $.urlParam = function(name){
     return decodeURI(results[1]) || 0;
 }
 
+function ConvertVariant(Tipo,cMoves){
+
+    if (Tipo==0){
+        $('#Variant0').html('');
+    }else if (Tipo==1){
+        $('#Variant1').html('');
+    }else if (Tipo==2){
+        $('#Variant2').html('');
+    }else if (Tipo==3){
+        $('#Variant3').html('');
+    }
+    
+    var aMoves = cMoves.split(" ");
+    var aCadenaFEN = aFENs[ContPosi];
+    var cCadFEN = aCadenaFEN[0] + " " + aCadenaFEN[1] + " " + aCadenaFEN[2] + " " + aCadenaFEN[3] + " " + aCadenaFEN[4] + " " + aCadenaFEN[5];
+    
+    chess2.load(cCadFEN);
+    
+    for (var x = 0; x < aMoves.length; x++){
+        var oRest = chess2.move(aMoves[x], {sloppy: true}); 
+        DrawVariant(Tipo,oRest); 
+        if (x==10){
+            break;
+        }         
+    }
+
+}
+
+function DrawVariant(Tipo,oRest){
+
+    //Capture
+    var Capture = '-';
+    if (oRest.flags == 'c') {
+        Capture = 'x';
+    }
+    
+    //Coronacion
+    var PiezaCor = '';
+    var To = oRest.to;
+    if (oRest.flags == 'np') {
+        PiezaCor = '=' + ((chess2.get(To)).type).toUpperCase();            
+    }else if (oRest.flags == 'cp') {
+        Capture = 'x';
+        PiezaCor = '=' + ((chess2.get(To)).type).toUpperCase();
+    }  
+    
+    var Symbol;
+    var cMove = oRest.from + Capture + oRest.to + PiezaCor;
+     
+    if (oRest.color=='w'){
+        if (oRest.piece=='p'){
+            Symbol = '&#112;';             
+        }else if (oRest.piece=='n'){
+            Symbol = '&#104;';
+        }else if (oRest.piece=='b'){
+            Symbol = '&#98;';
+        }else if (oRest.piece=='r'){
+            Symbol = '&#114;';
+        }else if (oRest.piece=='q'){
+            Symbol = '&#113;';
+        }else if (oRest.piece=='k'){
+            Symbol = '&#107;';
+        }
+    }else{
+        if (oRest.piece=='p'){
+            Symbol = '&#111;';            
+        }else if (oRest.piece=='n'){
+            Symbol = '&#106;';
+        }else if (oRest.piece=='b'){
+            Symbol = '&#110;';
+        }else if (oRest.piece=='r'){
+            Symbol = '&#116;';
+        }else if (oRest.piece=='q'){
+            Symbol = '&#119;';
+        }else if (oRest.piece=='k'){
+            Symbol = '&#108;';
+        }
+    }
+
+    if (Tipo==0){
+        $('#Variant0').append('<label style="color:green; float:left; margin-left:5px; margin-top:4px; font-family:Chess; font-weight:bold; font-size:23px">' + Symbol + '</label>');  
+        $('#Variant0').append('<label style="color:green; float:left; margin-left:0px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:17px">' + cMove + '</label>');  
+    }else if (Tipo==1){
+        $('#Variant1').append('<label style="color:green; float:left; margin-left:5px; margin-top:4px; font-family:Chess; font-weight:bold; font-size:23px">' + Symbol + '</label>');  
+        $('#Variant1').append('<label style="color:green; float:left; margin-left:0px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:17px">' + cMove + '</label>');  
+    }else if (Tipo==2){
+        $('#Variant2').append('<label style="color:green; float:left; margin-left:5px; margin-top:4px; font-family:Chess; font-weight:bold; font-size:23px">' + Symbol + '</label>');  
+        $('#Variant2').append('<label style="color:green; float:left; margin-left:0px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:17px">' + cMove + '</label>');  
+    }else if (Tipo==3){
+        $('#Variant3').append('<label style="color:green; float:left; margin-left:5px; margin-top:4px; font-family:Chess; font-weight:bold; font-size:23px">' + Symbol + '</label>');  
+        $('#Variant3').append('<label style="color:green; float:left; margin-left:0px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:17px">' + cMove + '</label>');  
+    }
+
+}
+
+function BuscarLugar(Elemento){
+
+    var Lugar = -1;
+    
+    for ( var i = 0; i < aAnalizeResult.length; i++){
+
+        if (aAnalizeResult[i]==Elemento){
+            Lugar = i;
+            break;
+        }
+
+    }
+    
+    console.log('Lugar: ' + Lugar)
+
+    return Lugar;
+}
