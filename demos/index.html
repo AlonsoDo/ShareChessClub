@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="description" content="Share Chess Room using audio, video along with text chat and filesharing with RTCMultiConnection v3.0 lib" />
     <meta name="keywords" content="Chess,Lesson,OnLine,by Internet,Virtual,Web,Video,Chat,Audio,File,Share,Board" />
-    <title>ShareChessClub v0.7.7 beta</title>
+    <title>ShareChessClub v0.7.8 beta</title>
     <link rel="stylesheet" href="res/css/style.css">
     
     <style media="screen" type="text/css">/*<![CDATA[*/@import 'res/css/stylesheet.css';/*]]>*/</style>
@@ -94,8 +94,8 @@
             <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Analyzer: Stockfish Engine</label>
             <label style="color:green; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Select depth:</label>
             <input id="SetDepth" type="text" name="value" value="5" maxlength="3" style="color:#800080; width:50px; float:left; margin-left:3px; margin-top:8px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:25px">
-            <button id="BtnRun" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Run Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-circle-triangle-e">icon</span>Run</button>
-            <button id="BtnStop" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Stop Engine"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-stop">icon</span>Stop</button>
+            <button id="BtnRun" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Run Engine. You must stop the analysis engine to receive new movements."><span style="float:left; font-size:24px;" class="ui-icon ui-icon-circle-triangle-e">icon</span>Run</button>
+            <button id="BtnStop" style="float:left; width:86px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Stop Engine. You must stop the analysis engine to receive new movements."><span style="float:left; font-size:24px;" class="ui-icon ui-icon-stop">icon</span>Stop</button>
             <label id="StopingLabel" style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:18px">Stoping...</label>
             <img id="ImgLoader" src="res/img/loader.gif" style="float:left; margin-left:4px; margin-top:8px;">
             <label style="color:red; float:left; margin-left:25px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Best move: </label>
@@ -134,10 +134,10 @@
     
     <div style=" background-color:#e8e8e8; border:3px white solid; width:1100px; height:50px; margin: 4px auto 0 auto;">       
         <button id="share-file" style="float:left; width:132px; height:35px; margin-left:25px; margin-top:8px; padding-top:4px; font-family:Arial,Helvetica,sans-serif; font-weight:bold;" type="button" title="Share files between connections"><span style="float:left; font-size:24px;" class="ui-icon ui-icon-transferthick-e-w">icon</span>Share file</button>
-        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.7 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
+        <label style="color:green; float:left; margin-left:120px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">ShareChessClub version 0.7.8 beta by ApoloSoft (c) 2019 Contact: alonso.caspi@gmail.com</label>
     </div>
     
-    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:240px; margin: 4px auto 0 auto;">
+    <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:270px; margin: 4px auto 0 auto;">
         <label style="color:green; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Instructions: </label>
         <label style="color:red; float:left; margin-left:10px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">1. To share the same space, the code or name of the room must be the same for all participants. You can choose one easier to remember.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">2. Click on the red and green moves to go to the current position.</label>
@@ -146,6 +146,9 @@
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">5. You can do a local test by opening two tabs in the browser and connect to the same room name.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">6. Due to the constant changes while developing the application, it is possible that data from old positions can not be loaded due to incompatibility in the format.</label>
         <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">7. Using a high calculation depth with the analysis engine causes slowness in the web application.</label>
+        <label style="color:red; float:left; margin-left:20px; margin-top:18px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">8. You must stop the analysis engine to receive new movements.</label>
+        
+        
     </div>    
     <div style="background-color:#e8e8e8; border:3px white solid; width:1100px; height:30px; margin: 4px auto 0 auto;">
         <label style="color:green; float:left; margin-left:20px; margin-top:7px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:15px">Share File Container</label>
@@ -187,8 +190,25 @@
         </textarea>
     </div>
     
-    <div id="dialog-set" title="Set position">
-        <canvas id="SetCanvas" width="564" height="544" style="float:left; margin-top:20px; margin-left:20px; border:2px white solid"></canvas>
+    <div id="dialog-set" title="Set position">            
+        <div style="float:left; height:544px; width:564px; margin-top:20px; margin-left:20px; border:0px black solid">
+            <canvas id="SetCanvas" width="564" height="544" style="float:left; margin-top:0px; margin-left:0px; border:2px white solid"></canvas>
+        </div>        
+        <div style="float:left; height:300px; width:180px; margin-top:100px; margin-left:20px; border:3px white solid">  
+            <select id="Turno" style="float:left; color:red; margin-left:20px; margin-top:20px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">
+                <option value="White turn">White turn</option>
+                <option value="Black turn">Black turn</option>                
+            </select>        
+            <label style="float:left; color:red; margin-left:20px; margin-top:20px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:16px;">Castling</label>
+            <input type="checkbox" id="EnroqueCortoBlancas" value="ECB" style="float:left; color:green; margin-left:-60px; margin-top:60px;">
+            <label style="float:left; color:green; margin-left:-36px; margin-top:58px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:14px;" for="cbox1">White O-O</label>
+            <input type="checkbox" id="EnroqueLargoBlancas" value="ECB" style="float:left; color:green; margin-left:-92px; margin-top:80px;">
+            <label style="float:left; color:green; margin-left:-69px; margin-top:78px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:14px;" for="cbox1">White O-O-O</label>
+            <input type="checkbox" id="EnroqueCortoNegras" value="ECB" style="float:left; color:green; margin-left:-107px; margin-top:100px;">
+            <label style="float:left; color:green; margin-left:-84px; margin-top:98px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:14px;" for="cbox1">Black O-O</label>
+            <input type="checkbox" id="EnroqueLargoNegras" value="ECB" style="float:left; color:green; margin-left:-107px; margin-top:120px;">
+            <label style="float:left; color:green; margin-left:-84px; margin-top:118px; font-family:Arial,Helvetica,sans-serif; font-weight:bold; font-size:14px;" for="cbox1">Black O-O-O</label>
+        </div>
     </div>      
 
     <script src="RTCMultiConnection.min.js"></script>
@@ -202,14 +222,13 @@
     var connection;
     var chess = new Chess();
     var chess2 = new Chess();
-    var stockfish = STOCKFISH();
+    //var stockfish = STOCKFISH();
+    var stockfish = new Worker('stockfish.js');
     var AnalizeResult;
     var aAnalizeResult;
     var Analizando = false;
             
     $(document).ready(function(){
-        
-        $('#StopingLabel').hide();
         
         stockfish.postMessage("setoption name multipv value 3");
         
@@ -233,10 +252,11 @@
             Lugar = BuscarLugar('bestmove');            
             if (Lugar != -1){
                 ConvertVariant(0,aAnalizeResult[Lugar+1]);
-                $('#ImgLoader').hide();
-                //$('#BtnStop').hide();
                 $('#StopingLabel').hide();    
-                //$('#BtnRun').show();
+                $('#BtnStop').hide();            
+                $('#BtnRun').show();
+                $('#ImgLoader').hide();
+                Analizando = false;
             }
             
             Lugar = BuscarLugar('multipv')
@@ -319,6 +339,7 @@
         
         $('#BtnStop').hide();
         $('#ImgLoader').hide();
+        $('#StopingLabel').hide();
         
         $('#BtnRun').click(function(){            
             $('#BtnRun').hide();
@@ -335,10 +356,8 @@
         });
         
         $('#BtnStop').click(function(){            
-            $('#BtnStop').hide();            
-            $('#BtnRun').show();
-            Analizando = false;
-            stockfish.postMessage("stop");
+            $('#StopingLabel').show()
+            stockfish.postMessage("stop");            
         });
         
         $('#new_Btn').button();        
@@ -545,7 +564,7 @@
         $('#dialog-set').dialog({
 		autoOpen: false,
 		height: 720,
-		width: 640,
+		width: 840,
 		modal: true,			
 		show: 'blind',
 		hide: 'explode',
@@ -865,35 +884,43 @@
                         
                     }else if (Message.SubEvent == 'SendMove') {
                         
-                        GetMove(Message);                   
+                        if (!Analizando)
+                            GetMove(Message);                   
                         
                     }else if (Message.SubEvent == 'BtnIniEvent') {
                         
-                        BtnIniEvent(Message);                
+                        if (!Analizando)
+                            BtnIniEvent(Message);                
                         
                     }else if (Message.SubEvent == 'BtnEndEvent') {
                         
-                        BtnEndEvent(Message);                
+                        if (!Analizando)
+                            BtnEndEvent(Message);                
                         
                     }else if (Message.SubEvent == 'MoveClickEvent') {
                         
-                        MoveClickEvent(Message);                
+                        if (!Analizando)
+                            MoveClickEvent(Message);                
                         
                     }else if (Message.SubEvent == 'MoveClick2Event') {
                         
-                        MoveClick2Event(Message);                
+                        if (!Analizando)
+                            MoveClick2Event(Message);                
                         
                     }else if (Message.SubEvent == 'MoveClick5Event') {
                         
-                        MoveClick5Event(Message);                
+                        if (!Analizando)
+                            MoveClick5Event(Message);                
                         
                     }else if (Message.SubEvent == 'BtnPrevEvent') {
                         
-                        BtnPrevEvent(Message);                
+                        if (!Analizando)
+                            BtnPrevEvent(Message);                
                         
                     }else if (Message.SubEvent == 'BtnNextEvent') {
                         
-                        BtnNextEvent(Message);                
+                        if (!Analizando)
+                            BtnNextEvent(Message);                
                         
                     }else if (Message.SubEvent == 'SendColorCas') {
                         aColorCas = Message.aColorCas;
@@ -1063,7 +1090,7 @@
                                 $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:0px; margin-top:0px; font-family:Chess; font-size:23px">' + aVariantes[x][5] + '</label>');
                                 $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:rgb(128, 0, 0); margin-left:6px; margin-top:2px; font-family:Arial,Helvetica,sans-serif; font-size:17px" id="'+aVariantes[x][1]+'" onclick="MoveClick(id)">' + aVariantes[x][2] + '</label>');
                             }else{                                
-                                $('#DivMoves').append('<div id="diver'+aVariantes[x][1]+'" style="float:left; border:1px solid black;"></div>');
+                                $('#DivMoves').append('<div id="diver'+aVariantes[x][1]+'" style="float:left; border:0px solid black;"></div>');
                                 $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:0px; margin-top:0px; font-family:Chess; font-size:23px">' + aVariantes[x][5] + '</label>');
                                 $('#diver' + aVariantes[x][1]).append('<label style="float:left; color:red; margin-left:6px; margin-top:2px; font-family:Arial,Helvetica,sans-serif; font-size:17px" id="'+aVariantes[x][1]+'" onclick="MoveClick(id)">' + aVariantes[x][2] + '</label>');
                             }                            

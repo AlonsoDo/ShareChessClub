@@ -1182,6 +1182,7 @@ function SendSET(aBuffer2){
     aVariantes = [];
     TotalNodos = 0;
     ClickOnMove = false;
+    aFENs = [];
     
     var aBuffer = new Array(5);
     aBuffer[0] = -1; // Nodo padre;
@@ -1242,7 +1243,113 @@ function SendSET(aBuffer2){
     $('#BtnIni').hide();
     $('#BtnEnd').hide();
     $('#BtnNext').hide();
-    $('#BtnPrev').hide();    
+    $('#BtnPrev').hide();
+    
+    // Making Fen String
+    var aFEN = new Array(6);
+    
+    aFEN[3] = '-';
+    aFEN[4] = '0';
+    aFEN[5] = '1';
+
+    var cTurn;
+    if ($('#Turno').val()=='White turn'){
+        cTurn = 'w';
+    }else{
+        cTurn = 'b';
+    }
+    console.log('Turno: '+cTurn)
+    aFEN[1] = cTurn;
+    
+    var cFENEnroque = '';
+
+    if ($('#EnroqueCortoBlancas').is(':checked')){
+        cFENEnroque = cFENEnroque + 'K';
+    }
+    if ($('#EnroqueLargoBlancas').is(':checked')){
+        cFENEnroque = cFENEnroque + 'Q';
+    }
+    if ($('#EnroqueCortoNegras').is(':checked')){
+        cFENEnroque = cFENEnroque + 'k';
+    }
+    if ($('#EnroqueLargoNegras').is(':checked')){
+        cFENEnroque = cFENEnroque + 'q';
+    }
+
+    if (cFENEnroque == '') {
+        cFENEnroque = '-';
+    }
+
+    console.log(cFENEnroque)
+    aFEN[2]=cFENEnroque;
+
+    // Crear FEN
+    var cFEN = '';
+    var Cont = 0;
+    for ( var i = 0; i < 8; i++) {
+        var ContCeros = 0;        
+        for ( var j = 0; j < 8; j++) {
+            if (aPos[Cont] == '0') {                
+                ContCeros++;
+                if (ContCeros == 8) {
+                    cFEN = cFEN + '8';
+                    ContCeros = 0;
+                }
+            }else{
+                if (ContCeros > 0) {
+                    cFEN = cFEN + ContCeros.toString();
+                    ContCeros = 0;
+                }
+                if (aPos[Cont].substring(0,2) == 'br') {
+                    cFEN = cFEN + 'r';
+                }else if (aPos[Cont].substring(0,2) == 'bn') {
+                    cFEN = cFEN + 'n';
+                }else if (aPos[Cont].substring(0,2) == 'bb') {
+                    cFEN = cFEN + 'b';
+                }else if (aPos[Cont].substring(0,2) == 'bq') {
+                    cFEN = cFEN + 'q';
+                }else if (aPos[Cont].substring(0,2) == 'bk') {
+                    cFEN = cFEN + 'k';
+                }else if (aPos[Cont].substring(0,2) == 'bp') {
+                    cFEN = cFEN + 'p';    
+                }else if (aPos[Cont].substring(0,2) == 'wp') {
+                    cFEN = cFEN + 'P';    
+                }else if (aPos[Cont].substring(0,2) == 'wr') {
+                    cFEN = cFEN + 'R';
+                }else if (aPos[Cont].substring(0,2) == 'wn') {
+                    cFEN = cFEN + 'N';
+                }else if (aPos[Cont].substring(0,2) == 'wb') {
+                    cFEN = cFEN + 'B';
+                }else if (aPos[Cont].substring(0,2) == 'wq') {
+                    cFEN = cFEN + 'Q';
+                }else if (aPos[Cont].substring(0,2) == 'wk') {
+                    cFEN = cFEN + 'K'; 
+                }               
+            }            
+            Cont++;
+        }        
+        if (ContCeros > 0) {
+            cFEN = cFEN + ContCeros.toString();
+        }
+        cFEN = cFEN + '/'
+    }   
+    
+    var cFEN = cFEN.substring(0, cFEN.length-1);
+    aFEN[0] = cFEN;    
+    aFENs.push(aFEN);    
+    var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
+
+    console.log('FEN: ' + CadenaFEN)
+
+    /*if (Analizando) {
+        $('#Variant0').html('');
+        $('#ImgLoader').show();
+        stockfish.postMessage("stop");    
+        stockfish.postMessage("position fen " + CadenaFEN);
+        stockfish.postMessage("go depth " + $('#SetDepth').val());    
+    }*/
+
+    $('#BtnIni').trigger('click');
     
     connection.getSocket().emit('MiEvento',{
         Chanel: cChanel,
@@ -1253,9 +1360,10 @@ function SendSET(aBuffer2){
         HayHermano: false,
         NodoPadre: -1,
         BufferMoveClick: 0,
-        TipoMove: 'FEN'
+        TipoMove: 'FEN',
+        FENs: aFENs
     });
-    
+        
     NodoPadre = ContPosi; //Listo para proximo movimiento
     
 }

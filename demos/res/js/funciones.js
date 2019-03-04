@@ -2148,6 +2148,7 @@ function GetMove(Message){
     Click1 = false;
     aPosiciones = [];
     aVariantes = [];
+    aFENs = [];
                                                 
     var x,i,j;
     
@@ -2216,7 +2217,7 @@ function GetMove(Message){
         Click1 = false;
     }
     
-    if (Message.TipoMove=='FEN'){
+    if (Message.TipoMove=='FEN'){       
         
         $('#DivMoves').html('');       
         
@@ -3105,13 +3106,13 @@ function IntroFen(){
     var CadenaFEN = aFEN[0] + ' ' + aFEN[1] + ' ' + aFEN[2] + ' ' + aFEN[3] + ' ' + aFEN[4] + ' ' +aFEN[5];
     
     console.log(CadenaFEN)
-    if (Analizando) {
+    /*if (Analizando) {
         $('#bestmovelabel').text('');
         $('#ImgLoader').show();
         stockfish.postMessage("stop");    
         stockfish.postMessage("position fen " + CadenaFEN);
         stockfish.postMessage("go depth " + $('#SetDepth').val());    
-    }
+    }*/
    
     for ( i = 0; i < FenString.length; i++ ){
     
@@ -3326,8 +3327,11 @@ function IntroFen(){
         HayHermano: false,
         NodoPadre: -1,
         BufferMoveClick: 0,
-        TipoMove: 'FEN'
+        TipoMove: 'FEN',
+        FENs: aFENs
     });
+
+    $('#BtnIni').trigger('click');
     
     NodoPadre = ContPosi; //Listo para proximo movimiento    
     
@@ -3675,6 +3679,7 @@ function CargarPGN() {
     ContPosi = 0;
     BufferContPosi = 0;
     TotalNodos = 1;
+    $('#BtnIni').trigger('click');
 }
 
 function MoveClick3(id){
@@ -4321,6 +4326,29 @@ function DrawVariant(Tipo,oRest){
     
     var Symbol;
     var cMove = oRest.from + Capture + oRest.to + PiezaCor;
+
+    //Enroques
+    if (oRest.color=='w'){
+        if (oRest.piece=='k'){
+            if (oRest.from=='e1'){
+               if (oRest.to=='g1'){
+                   cMove = 'OO';
+               }else if (oRest.to=='c1'){
+                   cMove = 'OOO'
+               }
+            }
+        }
+    }else{
+        if (oRest.piece=='k'){
+            if (oRest.from=='e8'){
+                if (oRest.to=='g8'){
+                    cMove = 'OO';
+                }else if (oRest.to=='c8'){
+                    cMove = 'OOO'
+                }
+            }
+        }
+    }
      
     if (oRest.color=='w'){
         if (oRest.piece=='p'){
